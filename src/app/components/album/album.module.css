@@ -1,0 +1,12 @@
+.artist {
+    font-style: italic;
+    font-size: larger;
+}
+
+.info {
+    padding-top: 6px;
+}
+
+.external-link a {
+    text-decoration: none !important;
+}

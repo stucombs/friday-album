@@ -6,13 +6,15 @@
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    color: inherit;
+    text-decoration-line: line-through;
+    text-decoration-thickness: 8px;
+    text-decoration-color: rgba(250, 247, 80, 0.6);
   }
 }
 
 /* Media query for touch devices */
-@media (hover: none) and (pointer: none) {
+@media (hover: none) and (pointer: coarse) {
     .footer a {
         text-decoration: underline;
     }

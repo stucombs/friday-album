@@ -40,6 +40,12 @@
   }
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .main a {
+    text-decoration: underline;
+  }
+}
+
 @media (max-width: 600px) {
   .page {
     padding: 32px;
@@ -48,6 +54,7 @@
 
   .main {
     align-items: center;
+    gap: 16px;
   }
 }
 
