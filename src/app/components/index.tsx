@@ -3,3 +3,4 @@ export * from './album';
 export * from './cover';
 export * from './footer';
 export * from './home';
+export * from './loader';
