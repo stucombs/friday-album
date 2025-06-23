@@ -3,6 +3,10 @@
     font-size: larger;
 }
 
+.card-content {
+    padding: 5px 50px !important;
+}
+
 .info {
     padding-top: 6px;
 }

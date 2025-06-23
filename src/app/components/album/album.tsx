@@ -33,8 +33,8 @@ export default function Album () {
                 const data = await getActiveAlbum();
                 console.log(data);
                 setAlbum(data);
-            } catch (e: any) {
-                setError(e.message || 'An unkown error occurred');
+            } catch (err: any) {
+                setError(err.message || 'An unkown error occurred');
             }
         }
 
@@ -45,7 +45,7 @@ export default function Album () {
 
     return (
         <Card>
-            <CardContent>
+            <CardContent className={styles['card-content']}>
                 <h2>{ album?.name }</h2>
                 <p className={styles.artist}>
                     { album?.artist }
