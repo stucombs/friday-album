@@ -10,7 +10,7 @@ export default function About () {
             <main className={styles.main}>
                 <Home></Home>
                 <h2>WHY FRIDAY</h2>
-                <p>All about Friday Album, a group listening concept</p>
+                <p>More coming soon, please check back later...</p>
             </main>
             <Footer></Footer>
         </div>

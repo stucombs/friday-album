@@ -1,7 +1,6 @@
 import styles from './history.module.css';
 import {
     Footer,
-    Album,
     Home
 } from '../components';
 
@@ -11,7 +10,7 @@ export default function History () {
             <main className={styles.main}>
                 <Home></Home>
                 <h2>PAST ALBUMS</h2>
-                <Album></Album>
+                <p>This page is still under construction, check back later...</p>
             </main>
             <Footer></Footer>
         </div>
