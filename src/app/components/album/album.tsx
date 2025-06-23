@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
 import styles from './album.module.css';
 import {
     Card,
@@ -5,34 +7,67 @@ import {
     CardActions,
     Button
 } from '@mui/material';
+import { getActiveAlbum } from '../../../services/album';
+import { useEffect, useState } from 'react';
 
-export default function Album() {
-    const strAlbumTitle = `Searchin' for a Rainbow`;
-    const strArtistName = `The Marshall Tucker Band`;
-    const strReleaseDate = 1975;
-    const strGenre = 'Rock';
-    const numTracks = 9;
+interface Album {
+  id: number;
+  name: string;
+  artist: string;
+  release_date: string;
+  genre: string;
+  number_tracks: number;
+  am_link: string;
+  spotify_link: string;
+  title: string;
+  cover_url?: string;
+}
 
-    const strAppleLink = `https://music.apple.com/us/album/searchin-for-a-rainbow/1795512840`;
-    const strspotifyLink = `https://open.spotify.com/album/1KEqpbUQ0g4lKFGFLZJnk1`;
+export default function Album () {
+    const [album, setAlbum] = useState<Album>();
+    const [error, setError] = useState<string>('');
+
+    useEffect(() => {
+        const fetchAlbum = async () => {
+            try {
+                const data = await getActiveAlbum();
+                console.log(data);
+                setAlbum(data);
+            } catch (e: any) {
+                setError(e.message || 'An unkown error occurred');
+            }
+        }
+
+        fetchAlbum();
+    }, []);
+
+    if( error ) return <p className='error'>{error}</p>;
 
     return (
         <Card>
             <CardContent>
-                <h2>{ strAlbumTitle}</h2>
-                <p className={styles.artist}>{ strArtistName }</p>
-                <p className={styles.info}><i>Released:</i> { strReleaseDate }</p>
-                <p className={styles.info}><i>Genre:</i> { strGenre }</p>
-                <p className={styles.info}><i>Tracks:</i> { numTracks }</p>
+                <h2>{ album?.name }</h2>
+                <p className={styles.artist}>
+                    { album?.artist }
+                </p>
+                <p className={styles.info}>
+                    Released: { album?.release_date }
+                </p>
+                <p className={`${styles.info} ${styles.genre}`}>
+                    Genre: { album?.genre }
+                </p>
+                <p className={styles.info}>
+                    Tracks: { album?.number_tracks }
+                </p>
             </CardContent>
             <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className={styles['external-link']}>
-                    <Button href={ strAppleLink }>
+                    <Button href={ album?.am_link }>
                         Apple
                     </Button>
                 </div>
                 <div className={styles['external-link']}>
-                    <Button href={ strspotifyLink }>
+                    <Button href={ album?.spotify_link }>
                         Spotify
                     </Button>
                 </div>
