@@ -20,14 +20,3 @@ export async  function getPastAlbums() {
 
     return data;
 }
-
-export async function getAlbumCover() {
-    const { data, error } = await supabase
-        .from('albums')
-        .select('id, cover_url')
-        .eq('is_active', true)
-        .maybeSingle();
-    if( error ) throw error;
-
-    return data;
-}
