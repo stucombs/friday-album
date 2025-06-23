@@ -23,9 +23,8 @@
     }
 }
 
-/* @media (max-width: 600px) {
-    .footer {
-        align-items: center;
-        justify-content: center;
-    }
-} */
+@media (prefers-color-scheme: light) {
+  .logo {
+    filter: invert();
+  }
+}

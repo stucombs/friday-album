@@ -13,6 +13,7 @@ export default function Footer () {
                 alt='Vercel'
                 width={12}
                 height={12}
+                className={ styles.logo }
                 style={{ display: 'inline' }}
               />
             </Link>
