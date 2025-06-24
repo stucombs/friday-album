@@ -4,8 +4,9 @@ import {
     Card,
     CardContent,
     CardActions,
-    Button
+    IconButton
 } from '@mui/material';
+import Image from 'next/image';
 
 export default function Album ({
     data,
@@ -30,20 +31,30 @@ export default function Album ({
                 <p className={`${styles.info} ${styles.genre}`}>
                     Genre: { data?.genre }
                 </p>
-                <p className={styles.info}>
+                {/* <p className={styles.info}>
                     Tracks: { data?.number_tracks }
-                </p>
+                </p> */}
             </CardContent>
             <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className={styles['external-link']}>
-                    <Button href={ data?.am_link }>
-                        Apple
-                    </Button>
+                    <IconButton href={ data?.am_link} aria-label="Apple Music" title="Listen on Apple Music">
+                        <Image
+                            src="/apple_music.svg"
+                            alt="Apple Music"
+                            width={30}
+                            height={30}
+                        />
+                    </IconButton>
                 </div>
                 <div className={styles['external-link']}>
-                    <Button href={ data?.spotify_link }>
-                        Spotify
-                    </Button>
+                    <IconButton href={ data?.spotify_link } aira-label="Spotify" title="Listen on Spotify">
+                        <Image
+                            src="/spotify.png"
+                            alt="Spotfiy"
+                            width={30}
+                            height={30}
+                        />
+                    </IconButton>
                 </div>
             </CardActions>
         </Card>
