@@ -2,6 +2,6 @@ import Link from 'next/link';
 
 export default function Home () {
     return (
-        <Link href="/">Return Home</Link>
+        <Link href="/">RETURN HOME</Link>
     )
 }

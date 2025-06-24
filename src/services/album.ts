@@ -15,7 +15,8 @@ export async  function getPastAlbums() {
     const { data, error } = await supabase
         .from('albums')
         .select('*')
-        .eq('is_active', false);
+        .eq('is_active', false)
+        .eq('past_active', true);
     if( error ) throw error;
 
     return data;

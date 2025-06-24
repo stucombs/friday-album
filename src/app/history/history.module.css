@@ -11,6 +11,7 @@
   justify-items: center;
   min-height: 100svh;
   font-family: var(--font-geist-sans);
+  overflow-y: auto;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,6 +31,10 @@
   gap: 32px;
 }
 
+.card-item {
+  min-width: 499px;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .main a:hover {
@@ -46,8 +51,8 @@
     padding-bottom: 80px;
   }
 
-  .main {
-    align-items: center;
+  .card-item {
+    min-width: 350px;
   }
 }
 

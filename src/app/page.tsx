@@ -7,7 +7,7 @@ import {
   Cover,
   Footer,
   Loader
-}from "./components";
+} from "./components";
 import Image from "next/image";
 import Link from 'next/link';
 import { getActiveAlbum } from '@/services/album';
@@ -47,7 +47,7 @@ export default function Home() {
           />
           <PageTitle></PageTitle>
           {loading ? (
-              <Loader></Loader>
+              <Loader />
             ) : (
               <>
                 <Cover data={activeAlbum?.cover_url}></Cover>
