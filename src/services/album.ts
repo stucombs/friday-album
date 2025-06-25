@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase-client';
+import { supabase } from '@/lib/supabase-server';
 
 export async function getActiveAlbum() {
   const { data, error } = await supabase

@@ -1,10 +1,25 @@
-.artist {
-    font-style: italic;
-    font-size: larger;
+.card {
+    padding: 10px;
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+    border-radius: 18px;
 }
 
 .card-content {
-    padding: 5px 50px !important;
+    padding: 5px 50px;
+}
+
+.card-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+    padding-top: 8px;
+}
+
+.artist {
+    font-style: italic;
+    font-size: larger;
 }
 
 .info {
@@ -13,6 +28,10 @@
 
 .external-link a {
     text-decoration: none !important;
+}
+
+.external-link:hover {
+    cursor: pointer;
 }
 
 .genre {

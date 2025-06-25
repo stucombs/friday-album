@@ -1,16 +1,6 @@
-import Image from "next/image"
+import Image from "next/image";
 
-interface Cover {
-    id: number | null,
-    cover_url: string;
-}
-
-export default function Cover ({
-    data
-}: {
-    data?: string
-}) {
-
+export default function Cover ({data}: { data?: string}) {
     if( data ){
         return (
             <Image
