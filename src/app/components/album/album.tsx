@@ -33,7 +33,7 @@ export default function Album ({data}: { data?: IAlbum}) {
                 </div>
                 <div className={styles['external-link']}>
                     <a
-                        href={data.am_link}
+                        href={data.spotify_link}
                         target="_blank"
                         rel="noopener noreferrer"
                         title="Listen on Spotify"
