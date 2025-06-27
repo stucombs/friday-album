@@ -16,7 +16,7 @@ export async  function getPastAlbums() {
         .from('albums')
         .select('*')
         .eq('is_active', false)
-        .eq('past_active', true);
+        .eq('archived', true);
     if( error ) throw error;
 
     return data;
