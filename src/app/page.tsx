@@ -10,6 +10,8 @@ import Link from 'next/link';
 import { getActiveAlbum } from '@/services/album';
 import { IAlbum } from '@/types/common';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const activeAlbum: IAlbum = await getActiveAlbum();
 

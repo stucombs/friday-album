@@ -1,3 +1,4 @@
+'use client';
 import styles from './album.module.css';
 import { IAlbum } from '@/types/common';
 import Image from 'next/image';
