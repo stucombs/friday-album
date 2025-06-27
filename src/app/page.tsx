@@ -20,9 +20,11 @@ export default async function Home() {
             className={styles.logo}
             src="/blank-album.png"
             alt="Album Icon"
-            width={200}
+            width={280}
             height={200}
-            priority
+            style={{
+              height: 'auto'
+            }}
           />
           <PageTitle></PageTitle>
           <Cover data={activeAlbum?.cover_url}></Cover>
