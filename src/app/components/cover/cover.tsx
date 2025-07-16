@@ -5,6 +5,7 @@ export default function Cover ({data}: { data?: string}) {
     if( data ){
         return (
             <Image
+                priority
                 src={ data }
                 alt="Album Cover"
                 width={250}

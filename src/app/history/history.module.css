@@ -14,19 +14,10 @@
   gap: 32px;
 }
 
-.card-item {
-  min-width: 499px;
-}
-
-
 @media (max-width: 600px) {
   .page {
     padding: 32px;
     padding-bottom: 80px;
-  }
-
-  .card-item {
-    min-width: 350px;
   }
 }
 
