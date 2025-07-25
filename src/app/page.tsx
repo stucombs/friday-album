@@ -1,10 +1,9 @@
-import styles from "./page.module.css";
 import {
   PageTitle,
   Album,
   Cover,
   Footer
-} from "./components";
+} from './components';
 import Link from 'next/link';
 import { getActiveAlbum } from '@/services/album';
 import { IAlbum } from '@/types/common';
@@ -15,8 +14,8 @@ export default async function Home() {
   const activeAlbum: IAlbum = await getActiveAlbum();
 
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+    <div className="page">
+      <main className="main">
           <PageTitle></PageTitle>
           <Cover data={activeAlbum?.cover_url}></Cover>
           <Album data={activeAlbum}></Album>

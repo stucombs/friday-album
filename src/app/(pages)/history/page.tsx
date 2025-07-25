@@ -1,9 +1,8 @@
-import styles from './history.module.css';
 import {
     Footer,
     Home,
     Album
-} from '../components';
+} from '../../components';
 import { IAlbum } from '@/types/common';
 import { getPastAlbums } from '@/services/album';
 
@@ -18,12 +17,12 @@ export default async function History () {
     }
 
     return (
-        <div className={styles.page}>
-            <main className={styles.main}>
+        <div className="page">
+            <main className="main">
                 <Home></Home>
                 <h2>PAST ALBUMS</h2>
                 { albums.map(album => (
-                    <div key={ album.id } className={styles['card-item']}>
+                    <div key={ album.id }>
                         <Album data={album}></Album>
                     </div>
                 ))}
