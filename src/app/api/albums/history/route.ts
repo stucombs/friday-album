@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getPastAlbums } from '@/services/albums.service';
 import { NextResponse } from 'next/server';
 
