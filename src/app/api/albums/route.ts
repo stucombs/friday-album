@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addAlbum, getAlbums } from '@/lib/services/albums.service';
+import { createAlbum, getAlbumBacklog } from '@/lib/services/albums.service';
 
 export const GET = async (): Promise<NextResponse> => {
     try {
-        const data = await getAlbums();
+        const data = await getAlbumBacklog();
 
         return NextResponse.json({
             status: 200,
@@ -21,8 +21,7 @@ export const GET = async (): Promise<NextResponse> => {
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
     try {
         const data = await request.json();
-
-        const result = await addAlbum(data);
+        const result = await createAlbum(data);
 
         return NextResponse.json({
             status: 201,
