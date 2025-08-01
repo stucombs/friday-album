@@ -1,17 +1,34 @@
 export interface IAlbum {
     id: number;
-    name: string;
+    title: string;
     artist: string;
     release_year: number;
-    genre: string;
+    genre: IGenre;
     number_tracks: number;
     am_link: string;
     spotify_link: string;
+    cover_url: string;
+};
+
+export interface IGenre {
+    id?: number;
+    name: string;
+    created_at?: Date;
+    updated_at?: Date;
+};
+
+export interface IAlbumDto {
     title: string;
+    artist: string;
+    release_year: string;
+    genre_id: number;
+    number_tracks: number;
+    am_link: string;
+    spotify_link: string;
     cover_url: string;
 };
 
 export interface ICoverArt {
     id: number;
     cover_url: string;
-}
+};

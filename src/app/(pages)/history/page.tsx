@@ -4,7 +4,7 @@ import {
     Album
 } from '../../components';
 import { IAlbum } from '@/types/common';
-import { getPastAlbums } from '@/services/album';
+import { getPastAlbums } from '@/services/albums.service';
 
 export default async function History () {
     const albums: IAlbum[] = await getPastAlbums();
