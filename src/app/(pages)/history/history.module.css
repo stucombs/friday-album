@@ -1,0 +1,13 @@
+.button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.paginate {
+    cursor: pointer;
+    padding: 9px;
+    border-radius: 10px;
+    width: 50px;
+    font-size: 14px;
+}
