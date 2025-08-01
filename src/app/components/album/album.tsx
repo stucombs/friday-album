@@ -9,7 +9,7 @@ export default function Album ({data}: { data?: IAlbum}) {
     return (
         <div className={styles.card}>
             <div className={styles['card-content']}>
-                <h2>{ data?.name }</h2>
+                <h2>{ data?.title }</h2>
                 <p className={`${styles.info} ${styles.artist}`}>
                     { data?.artist }
                 </p>
@@ -17,7 +17,7 @@ export default function Album ({data}: { data?: IAlbum}) {
                     Released: { data?.release_year }
                 </p>
                 <p className={`${styles.genre} ${styles.info}`}>
-                    Genre: { data?.genre }
+                    Genre: { data?.genre.name }
                 </p>
             </div>
             <div className={styles['card-action']}>

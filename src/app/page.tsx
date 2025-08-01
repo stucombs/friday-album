@@ -5,7 +5,7 @@ import {
   Footer
 } from './components';
 import Link from 'next/link';
-import { getActiveAlbum } from '@/services/album';
+import { getActiveAlbum } from '@/services/albums.service';
 import { IAlbum } from '@/types/common';
 
 export const dynamic = 'force-dynamic';
