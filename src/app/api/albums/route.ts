@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addAlbum, getAlbums } from '@/services/albums.service';
+import { addAlbum, getAlbums } from '@/lib/services/albums.service';
 
 export const GET = async (): Promise<NextResponse> => {
     try {

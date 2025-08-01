@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAlbumById } from '@/services/albums.service';
+import { getAlbumById } from '@/lib/services/albums.service';
 
 export const GET = async (
     request: NextRequest,

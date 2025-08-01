@@ -2,9 +2,9 @@ import {
     Footer,
     Home,
     Album
-} from '../../components';
+} from '@/app/components';
 import { IAlbum } from '@/types/common';
-import { getPastAlbums } from '@/services/albums.service';
+import { getPastAlbums } from '@/lib/services/albums.service';
 
 export default async function History () {
     const albums: IAlbum[] = await getPastAlbums();

@@ -87,3 +87,30 @@ export const addAlbum = async (payload: IAlbum) => {
   
   return data;
 };
+
+export const promoteAlbum = async (id: number) => {
+  // Demote current live album
+  const { error: demoteError } = await supabase
+    .from('albums')
+    .update({
+      archived: true,
+      is_active: false
+    })
+    .eq('is_active', true);
+  
+  if( demoteError ) throw demoteError;
+
+  //Promote new album
+
+  const { data, error } = await supabase
+    .from('albums')
+    .update({
+      is_active: true
+    })
+    .eq('id', id)
+    .select();
+  
+  if( error ) throw error;
+
+  return data;
+};

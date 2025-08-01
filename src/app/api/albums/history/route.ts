@@ -1,4 +1,4 @@
-import { getPastAlbums } from '@/services/albums.service';
+import { getPastAlbums } from '@/lib/services/albums.service';
 import { NextResponse } from 'next/server';
 
 export const GET = async (): Promise<NextResponse> => {
