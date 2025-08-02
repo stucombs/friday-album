@@ -7,11 +7,14 @@ import {
 import Link from 'next/link';
 import { getActiveAlbum } from '@/lib/services/albums.service';
 import { IAlbum } from '@/types/common';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/services/auth.service';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const activeAlbum: IAlbum = await getActiveAlbum();
+  const session = await getServerSession(authOptions);
 
   return (
     <div className="page">
@@ -21,6 +24,9 @@ export default async function Home() {
           <Album data={activeAlbum}></Album>
           <Link href="/about">WHY FRIDAY</Link>
           <Link href="/history">PAST ALBUMS</Link>
+          {
+            session && <Link href="/admin">ADMIN</Link>
+          }
       </main>
       <Footer></Footer>
     </div>

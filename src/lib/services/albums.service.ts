@@ -1,5 +1,7 @@
-import { supabase } from '@/lib/supabase-server';
+import { createClient } from '@/lib/supabase/client';
 import { IAlbum } from '@/types';
+
+const supabase = createClient();
 
 export const getActiveAlbum = async (): Promise<IAlbum> => {
   const { data, error } = await supabase
