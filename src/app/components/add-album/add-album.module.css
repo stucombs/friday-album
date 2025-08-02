@@ -1,0 +1,13 @@
+/* option {
+    text-transform: capitalize;
+    color: orange;
+} */
+
+.plain-link {
+    border: none;
+    background-color: inherit;
+    text-decoration: underline;
+    color: blue;
+    font-size: 12px;
+    cursor: pointer;
+}

@@ -1,7 +1,8 @@
 'use client';
 import {
     Home,
-    Footer
+    Footer,
+    NoAccess
 } from '@/app/components';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
@@ -11,14 +12,7 @@ function BackLog () {
     const { data: session, status } = useSession();
 
     if( status === 'unauthenticated' ){
-        return (
-            <div className="page">
-                <main className="main">
-                    <Home></Home>
-                    <p>You do not have access to this content</p>
-                </main>
-            </div>
-        );
+        return <NoAccess></NoAccess>;
     }
 
     return (

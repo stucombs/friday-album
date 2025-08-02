@@ -1,6 +1,7 @@
 import {
     Home,
-    Footer
+    Footer,
+    NoAccess
 } from '@/app/components';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/services/auth.service';
@@ -10,14 +11,7 @@ export default async function Admin () {
     const session = await getServerSession(authOptions);
 
     if( !session ){
-        return (
-            <div className="page">
-                <main className="main">
-                    <Home></Home>
-                    <p>You do not have access to this content</p>
-                </main>
-            </div>
-        );
+        return <NoAccess></NoAccess>;
     }
 
     return (
