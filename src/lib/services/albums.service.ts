@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/client';
-import { IAlbum } from '@/types';
+import { IAlbum, IAlbumDto } from '@/types';
 
 const supabase = createClient();
 
@@ -88,21 +88,26 @@ export const getPastAlbums = async (
   };
 };
 
-export const createAlbum = async (payload: IAlbum) => {
-  const { data, error } = await supabase
-    .from('albums')
-    .insert([
-      {
-        ...payload,
-        is_active: false,
-        archived: false
-      }
-    ])
-    .select();
-  
-  if( error ) throw error;
-  
-  return data;
+export const createAlbum = async (payload: IAlbumDto) => {
+	try {
+    	const { data, error } = await supabase
+      		.from('albums')
+      		.insert([
+        		{
+          			...payload,
+          			is_active: false,
+          			archived: false
+        		}
+      		])
+      		.select();
+    
+    		return { data, error };
+  	} catch(err: any) {
+    	return {
+      		data: null,
+      		error: err.message
+    	};
+  	}
 };
 
 export const promoteAlbum = async (id: number) => {

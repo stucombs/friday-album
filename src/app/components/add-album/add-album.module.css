@@ -1,13 +1,59 @@
-/* option {
-    text-transform: capitalize;
-    color: orange;
-} */
-
 .plain-link {
     border: none;
     background-color: inherit;
     text-decoration: underline;
-    color: blue;
+    color: cornflowerblue;
     font-size: 12px;
     cursor: pointer;
+    justify-self: baseline;
+}
+
+.form-submit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 200%;
+}
+
+.form-input {
+  padding: 4px;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+.input-el {
+  display: grid;
+  grid-template-columns: 150px 2fr;
+  align-items: center;
+}
+
+.col-100 {
+  width: 100%;
+}
+
+.col-75 {
+  width: 75%;
+}
+
+.col-50 {
+  width: 50%;
+}
+
+.col-25 {
+  width: 25%;
+}
+
+.bcontainer {
+    display: flex;
+    justify-content: center;
+}
+
+.submit {
+    background-color: limegreen;
+    color: white;
+    width: 40%;
+    padding: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 2em;
 }

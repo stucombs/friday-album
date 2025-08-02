@@ -20,12 +20,12 @@ export interface IGenre {
 export interface IAlbumDto {
     title: string;
     artist: string;
-    release_year: string;
-    genre_id: number;
-    number_tracks: number;
-    am_link: string;
-    spotify_link: string;
-    cover_url: string;
+    release_year?: string;
+    genre_id?: number;
+    number_tracks?: string;
+    am_link?: string;
+    spotify_link?: string;
+    cover_url?: string;
 };
 
 export interface ICoverArt {

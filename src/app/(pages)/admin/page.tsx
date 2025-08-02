@@ -10,9 +10,7 @@ import Link from 'next/link';
 export default async function Admin () {
     const session = await getServerSession(authOptions);
 
-    if( !session ){
-        return <NoAccess></NoAccess>;
-    }
+    if( !session ) return <NoAccess></NoAccess>;
 
     return (
         <div className="page">

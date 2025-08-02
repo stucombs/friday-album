@@ -2,7 +2,8 @@
 import {
     Footer,
     Home,
-    AddAlbumForm
+    AddAlbumForm,
+    NoAccess
 } from '@/app/components';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
@@ -11,16 +12,7 @@ import Link from 'next/link';
 function AddAlbum(){
     const { data: session, status } = useSession();
 
-    if( status === 'unauthenticated' ){
-        return (
-            <div className="page">
-                <main className="main">
-                    <Home></Home>
-                    <p>You do not have access to this content</p>
-                </main>
-            </div>
-        );
-    }
+    if( status === 'unauthenticated' ) return <NoAccess></NoAccess>;
 
     return (
         <div className="page">
