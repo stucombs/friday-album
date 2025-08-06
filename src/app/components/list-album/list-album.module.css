@@ -1,0 +1,48 @@
+.card {
+    width: 40vw;
+    padding: 10px;
+    background-color: var(--card);
+    border-radius: 18px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: anchor-center;
+    padding: 5px;
+}
+
+.card-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+    padding-top: 8px;
+}
+
+.artist {
+    font-style: italic;
+    font-size: larger;
+}
+
+.info {
+    padding-top: 6px;
+}
+
+.external-link a {
+    text-decoration: none !important;
+}
+
+.external-link:hover {
+    cursor: pointer;
+}
+
+.genre {
+    text-transform: capitalize;
+}
+
+@media (max-width: 600px) {
+    .card {
+        width: 80vw;
+    }
+}

@@ -78,11 +78,9 @@ export default function History () {
             <main className="main">
                 <Home></Home>
                 <h2>PAST ALBUMS</h2>
-                { albums.map((album: IAlbum) => (
-                    <div key={ album.id }>
-                        <Album data={album}></Album>
-                    </div>
-                ))}
+                { albums.map((album: IAlbum) =>
+                    <Album data={album} key={ album.id }></Album>
+                )}
                 <div className={styles['button-container']}>
                     { page > 1 &&
                         <button type="button" onClick={prevPage} className={styles.paginate}>

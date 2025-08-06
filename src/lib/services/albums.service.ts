@@ -37,8 +37,14 @@ export const getAlbumById = async (id: number): Promise<IAlbum> => {
   return data;
 };
 
-export const getAlbumBacklog = async (): Promise<IAlbum[]> => {
-  const { data, error } = await supabase
+export const getAlbumBacklog = async (
+  page: number = 1,
+  limit: number = 8
+) => {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error, count } = await supabase
     .from('albums')
     .select(`
       *,
@@ -48,11 +54,20 @@ export const getAlbumBacklog = async (): Promise<IAlbum[]> => {
     `)
     .eq('is_active', false)
     .eq('archived', false)
-    .order('id',{ ascending: true });
+    .range(from, to)
+    .order('id',{ ascending: false });
 
   if( error ) throw error;
 
-  return data;
+  return {
+    data,
+    meta: {
+      page,
+      limit,
+      total: count,
+      totalPages: Math.ceil((count ?? 0 ) / limit )
+    }
+  };
 };
 
 export const getPastAlbums = async (

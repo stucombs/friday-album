@@ -1,26 +1,83 @@
 'use client';
+import styles from './backlog.module.css';
 import {
     Home,
     Footer,
-    NoAccess
+    NoAccess,
+    Loader
 } from '@/app/components';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
+import { getAlbumBacklog } from '@/lib/services/albums.service';
+import { ListAlbum } from '@/app/components';
 import Link from 'next/link';
+import { IAlbum } from '@/types';
+import { useState, useEffect } from 'react';
 
 function BackLog () {
     const { data: session, status } = useSession();
+    const [albums, setAlbums] = useState<IAlbum[]>([]);
+    const [page, setPage] = useState(1);
+    const [meta, setMeta] = useState({ totalPages: 1 });
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    if( status === 'unauthenticated' ){
-        return <NoAccess></NoAccess>;
+    useEffect(() => {
+        const loadAlbums = async () => {
+            setLoading(true);
+            try {
+                const result = await getAlbumBacklog(page, 5);
+                setAlbums(result.data);
+                setMeta(result?.meta);
+                setLoading(false);
+            } catch(err: any) {
+                setError(err.message);
+                setLoading(false);
+            }
+        }
+
+        loadAlbums();
+    }, [page]);
+
+    const nextPage = () => {
+        if( page < meta.totalPages ){
+            setPage(page + 1);
+        }
     }
+
+    const prevPage = () => {
+        if( page > 1 ){
+            setPage(page - 1);
+        }
+    }
+
+    if( status === 'unauthenticated' ) return <NoAccess></NoAccess>;
 
     return (
         <div className="page">
             <main className="main">
                 <Home></Home>
                 <Link href="/admin">RETURN TO ADMIN</Link>
-                <h2>View Backlog</h2>
+                <h2>ALBUM BACKLOG</h2>
+                { loading && <Loader></Loader> }
+                { error && <p className="error">{ error }</p> }
+                { !loading && !error && 
+                    albums.map((album: IAlbum) =>
+                        <ListAlbum data={ album } key={album.id}></ListAlbum>
+                    )
+                }
+                <div className={styles['button-container']}>
+                    { page > 1 && 
+                        <button type="button" onClick={prevPage} className={styles.paginate}>
+                            Prev
+                        </button>
+                    }
+                    { page < meta.totalPages &&
+                        <button type="button" onClick={nextPage} className={styles.paginate}>
+                            Next
+                        </button>
+                    }
+                </div>
             </main>
             <Footer></Footer>
         </div>
