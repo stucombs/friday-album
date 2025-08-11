@@ -151,3 +151,14 @@ export const promoteAlbum = async (id: number) => {
 
   return data;
 };
+
+export const deleteAlbum = async (id: number) => {
+  const { data, error } = await supabase
+    .from('albums')
+    .delete()
+    .eq('id', id);
+
+    if( error ) throw error;
+
+    return data;
+};
