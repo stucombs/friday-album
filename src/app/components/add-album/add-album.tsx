@@ -67,30 +67,26 @@ export default function AddAlbumForm () {
 
     return (
         <form onSubmit={handleSubmit} className={styles['form-submit']}>
-            <div className={styles['input-el']}>
-                <label className="form-label" htmlFor="title">Title</label>
-                <input
-                    type="text"
-                    className={`${styles['form-input']} ${styles['col-75']}`}
-                    name="title"
-                    id="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div className={styles['input-el']}>
-                <label>Artist</label>
-                <input
-                    type="text"
-                    className={`${styles['form-input']} ${styles['col-75']}`}
-                    name="artist"
-                    id="artist"
-                    value={formData.artist}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
+            <input
+                type="text"
+                placeholder="Title"
+                className="input input-md col-100"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+            />
+            <input
+                type="text"
+                className="input input-md col-100"
+                placeholder="Artist"
+                name="artist"
+                id="artist"
+                value={formData.artist}
+                onChange={handleChange}
+                required
+            />
             <div className={styles['input-el']}>
                 <label>Genre</label>
                 <select
@@ -168,7 +164,7 @@ export default function AddAlbumForm () {
                 />
             </div>
             <div className={styles.bcontainer}>
-                <button type="submit" className={styles.submit} disabled={loading}>
+                <button type="submit" className="btn btn-success" disabled={loading}>
                     Submit
                 </button>
             </div>

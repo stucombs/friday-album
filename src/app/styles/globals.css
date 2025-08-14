@@ -1,19 +1,20 @@
-:root {
-  --background: rgb(255, 255, 255);
-  --foreground: rgb(10, 10, 10);
-  --card: light-dark(rgb(220, 220, 220), rgb(38, 38, 38));
-  --card-foreground: rgb(10, 10, 10);
-  --primary: rgb(23, 23, 23);
-  --primary-foreground: rgb(250, 250, 250);
-  --secondary: rgb(245, 245, 245);
-  --secondary-foreground: rgb(23, 23, 23);
-  --warn: light-dark(rgb(231, 0, 11),rgb(255, 100, 103));
-  --input: rgb(229, 229, 229);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@plugin "daisyui" {
+  themes: emerald --default, sunset --prefersdark;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html,
 body {
-  max-width: 100vw;
+  /* max-width: 100vw; */
   overflow-x: hidden;
   padding: 0;
   margin: 0;
@@ -24,12 +25,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 18px;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 a {
@@ -101,4 +96,21 @@ h3 {
     text-decoration-thickness: 8px;
     text-decoration-color: rgba(250, 247, 80, 0.6);
   }
+}
+
+/* FORMS */
+.col-100 {
+  width: 100%;
+}
+
+.col-75 {
+  width: 75%;
+}
+
+.col-50 {
+  width: 50%;
+}
+
+.col-25 {
+  width: 25%;
 }

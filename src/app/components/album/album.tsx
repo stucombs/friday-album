@@ -7,8 +7,8 @@ export default function Album ({data}: { data?: IAlbum}) {
     if( !data ) return <p>No album active, check back later!</p>
 
     return (
-        <div className={styles.card}>
-            <div className={styles['card-content']}>
+        <div className="card bg-base-200 w-full sm:w-80 md:w-96 lg:w-[700px] shadow-lg p-5">
+            <div className="card-body">
                 <h2>{ data?.title }</h2>
                 <p className={`${styles.info} ${styles.artist}`}>
                     { data?.artist }
@@ -20,7 +20,7 @@ export default function Album ({data}: { data?: IAlbum}) {
                     Genre: { data?.genre.name }
                 </p>
             </div>
-            <div className={styles['card-action']}>
+            <div className="card-actions justify-center">
                 <div className={styles['external-link']}>
                     <a
                         href={data.am_link}
