@@ -66,7 +66,7 @@ export default function AddAlbumForm () {
     };
 
     return (
-        <form onSubmit={handleSubmit} className={styles['form-submit']}>
+        <form onSubmit={handleSubmit} className={styles.formsubmit}>
             <input
                 type="text"
                 placeholder="Title"
@@ -87,82 +87,75 @@ export default function AddAlbumForm () {
                 onChange={handleChange}
                 required
             />
-            <div className={styles['input-el']}>
-                <label>Genre</label>
+            <div className={styles.double}>
                 <select
-                    className={`${styles['form-input']} ${styles['col-50']}`}
-                    name="genre_id"
-                    id="genre_id"
+                    defaultValue="0"
+                    className="select col-75"
                     onChange={handleChange}
+                    id="genre_id"
+                    name="genre_id"
                 >
-                    <option></option>
-                    { genres.map(genre =>
-                        <option value={genre.id} key={genre.id} className={styles.capitalize}>
+                    <option disabled={true} value="0">Select a genre</option>
+                    { genres.map(genre => 
+                        <option value={genre.id} key={genre.id}>
                             { genre.name }
                         </option>
                     )}
                 </select>
-                <button type="button" className={styles['plain-link']}>Edit Genres</button>
+                <button type="button" className={styles.plainlink}>Edit Genres</button>
             </div>
-            <div className={styles['input-el']}>
-                <label>Release Year</label>
+            <div className={styles.double}>
                 <input
                     type="number"
+                    className="input input-md col-25"
+                    placeholder="Release Year"
                     min="1900"
                     max="2100"
-                    className={`${styles['form-input']} ${styles['col-25']}`}
                     name="release_year"
                     id="release_year"
                     value={formData.release_year}
                     onChange={handleChange}
+                    required
                 />
-            </div>
-            <div className={styles['input-el']}>
-                <label># of Tracks</label>
                 <input
                     type="number"
+                    className="input input-md col-25"
+                    placeholder="# of tracks"
                     min="1"
-                    max="30"
-                    className={`${styles['form-input']} ${styles['col-25']}`}
+                    max="50"
                     name="number_tracks"
                     id="number_tracks"
                     value={formData.number_tracks}
                     onChange={handleChange}
                 />
             </div>
-            <div className={styles['input-el']}>
-                <label htmlFor="cover_url">Cover URL</label>
-                <input
-                    type="text"
-                    className={`${styles['form-input']} ${styles['col-75']}`}
-                    name="cover_url"
-                    id="cover_url"
-                    value={formData.cover_url}
-                    onChange={handleChange}
-                />
-            </div>
-           <div className={styles['input-el']}>
-                <label htmlFor="am_link">Apple Music Link</label>
-                <input
-                    type="text"
-                    className={`${styles['form-input']} ${styles['col-75']}`}
-                    name="am_link"
-                    id="am_link"
-                    value={formData.am_link}
-                    onChange={handleChange}
-                />
-            </div>
-           <div className={styles['input-el']}>
-                <label htmlFor="spotify_link">Spotify Link</label>
-                <input
-                    type="text"
-                    className={`${styles['form-input']} ${styles['col-75']}`}
-                    name="spotify_link"
-                    id="spotify_link"
-                    value={formData.spotify_link}
-                    onChange={handleChange}
-                />
-            </div>
+            <input
+                type="text"
+                className="input input-md col-100"
+                placeholder="Cover URL"
+                name="cover_url"
+                id="cover_url"
+                value={formData.cover_url}
+                onChange={handleChange}
+            />
+            <input
+                type="text"
+                className="input input-md col-100"
+                placeholder="Apple Music Link"
+                name="am_link"
+                id="am_link"
+                value={formData.am_link}
+                onChange={handleChange}
+            />
+            <input
+                type="text"
+                className="input input-md col-100"
+                placeholder="Spotify Link"
+                name="spotify_link"
+                id="spotify_link"
+                value={formData.spotify_link}
+                onChange={handleChange}
+            />
             <div className={styles.bcontainer}>
                 <button type="submit" className="btn btn-success" disabled={loading}>
                     Submit

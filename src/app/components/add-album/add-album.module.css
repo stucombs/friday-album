@@ -1,4 +1,4 @@
-.plain-link {
+.plainlink {
     border: none;
     background-color: inherit;
     text-decoration: underline;
@@ -8,25 +8,20 @@
     justify-self: baseline;
 }
 
-.form-submit {
+.formsubmit {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 32vw;
 }
-
-.form-input {
-  padding: 4px;
-  font-size: 16px;
-  border-radius: 6px;
-}
-
-/* .input-el {
-  display: grid;
-  grid-template-columns: 150px 2fr;
-  align-items: center;
-} */
 
 .bcontainer {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+.double {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
 }
