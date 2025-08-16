@@ -158,7 +158,7 @@ export default function AddAlbumForm () {
             />
             <div className={styles.bcontainer}>
                 <button type="submit" className="btn btn-success" disabled={loading}>
-                    Submit
+                    Submit { loading && <span className="loading loading-spinner text-success"></span> }
                 </button>
             </div>
             { error && 
