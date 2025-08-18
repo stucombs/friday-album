@@ -51,7 +51,7 @@ export const getAlbumBacklog = async (
       genre (
         name
       )
-    `)
+    `, { count: 'exact' })
     .eq('is_active', false)
     .eq('archived', false)
     .range(from, to)

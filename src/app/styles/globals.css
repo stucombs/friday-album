@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @plugin "daisyui" {
-  themes: emerald --default, sunset --prefersdark;
+  themes: emerald --default, business --prefersdark;
 }
 
 * {
@@ -32,6 +32,7 @@ a {
 
 .error {
   color: red;
+  font-size: 15px;
 }
 
 .page {
@@ -62,6 +63,10 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
+  html,
+  body {
+    /* color: white; */
+  }
   .logo {
     filter: invert();
   }
@@ -123,6 +128,11 @@ a {
 .card-width {
   width: 30vw;
   border-radius: 18px;
+}
+
+.log-album {
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 @media (max-width: 600px) {

@@ -9,7 +9,7 @@ import {
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { getAlbumBacklog } from '@/lib/services/albums.service';
-import { ListAlbum } from '@/app/components';
+import { AlbumLog } from '@/app/components';
 import Link from 'next/link';
 import { IAlbum } from '@/types';
 import { useState, useEffect } from 'react';
@@ -26,7 +26,7 @@ function BackLog () {
         const loadAlbums = async () => {
             setLoading(true);
             try {
-                const result = await getAlbumBacklog(page, 5);
+                const result = await getAlbumBacklog(page, 6);
                 setAlbums(result.data);
                 setMeta(result?.meta);
                 setLoading(false);
@@ -37,6 +37,7 @@ function BackLog () {
         }
 
         loadAlbums();
+        console.log(meta);
     }, [page]);
 
     const nextPage = () => {
@@ -63,10 +64,10 @@ function BackLog () {
                 { error && <p className="error">{ error }</p> }
                 { !loading && !error && 
                     albums.map((album: IAlbum) =>
-                        <ListAlbum data={ album } key={album.id}></ListAlbum>
+                        <AlbumLog data={ album } key={album.id}></AlbumLog>
                     )
                 }
-                <div className={styles['button-container']}>
+                <div className={styles.bcontainer}>
                     { page > 1 &&
                         <button type="button" className="btn btn-info" onClick={prevPage}>
                             &lt;&nbsp;Previous

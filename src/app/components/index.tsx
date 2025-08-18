@@ -6,4 +6,4 @@ export * from './home';
 export * from './loader';
 export * from './add-album';
 export * from './no-access';
-export * from './list-album';
+export * from './album-log';
