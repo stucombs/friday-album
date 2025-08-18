@@ -50,7 +50,7 @@ export default function History () {
             <div className="page">
                 <main className="main">
                     <Home></Home>
-                    <h2>PAST ALBUMS</h2>
+                    <h3>ALBUM HISTORY</h3>
                     <p className='error'>
                         An error occured loading albums, please try again.
                     </p>
@@ -65,7 +65,7 @@ export default function History () {
             <div className="page">
                 <main className="main">
                     <Home></Home>
-                    <h2>PAST ALBUMS</h2>
+                    <h3>ALBUM HISTORY</h3>
                     <Loader></Loader>
                 </main>
                 <Footer></Footer>
@@ -77,19 +77,19 @@ export default function History () {
         <div className="page">
             <main className="main">
                 <Home></Home>
-                <h2>PAST ALBUMS</h2>
+                <h3>ALBUM HISTORY</h3>
                 { albums.map((album: IAlbum) =>
                     <Album data={album} key={ album.id }></Album>
                 )}
                 <div className={styles['button-container']}>
                     { page > 1 &&
-                        <button type="button" onClick={prevPage} className={styles.paginate}>
-                            Prev
+                        <button type="button" className="btn btn-info" onClick={prevPage}>
+                            &lt;&nbsp;Previous
                         </button>
                     }
                     { page < meta.totalPages && 
-                        <button type="button" onClick={nextPage} className={styles.paginate}>
-                            Next
+                        <button type="button" className="btn btn-info" onClick={nextPage}>
+                            Next&nbsp;&gt;
                         </button>
                     }
                 </div>

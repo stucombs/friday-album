@@ -40,7 +40,7 @@ export default function ListAlbum ({data}: { data: IAlbum}) {
     return (
         <div className={styles.card}>
             <div className={styles['card-content']}>
-                <h2>{ data.title }</h2>
+                <h3>{ data.title }</h3>
                 <p className={`${styles.info} ${styles.artist}`}>
                     { data.artist }
                 </p>

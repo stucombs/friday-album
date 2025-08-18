@@ -19,7 +19,7 @@ function AddAlbum(){
             <main className="main">
                 <Home></Home>
                 <Link href="/admin">RETURN TO ADMIN</Link>
-                <h2>Add a new Album</h2>
+                <h3>Add a new Album</h3>
                 <AddAlbumForm></AddAlbumForm>
             </main>
             <Footer></Footer>

@@ -1,9 +1,10 @@
 .footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 16px;
 }
 
 /* Enable hover only on non-touch devices */
@@ -18,9 +19,9 @@
 
 /* Media query for touch devices */
 @media (hover: none) and (pointer: coarse) {
-    .footer a {
-        text-decoration: underline;
-    }
+  .footer a {
+    text-decoration: underline;
+  }
 }
 
 @media (prefers-color-scheme: light) {

@@ -16,7 +16,7 @@ export default async function Admin () {
         <div className="page">
             <main className="main">
                 <Home></Home>
-                <h2>🔒 Admin Pages 🔒</h2>
+                <h3>🔒 Admin Pages 🔒</h3>
                 <Link href="/admin/add-album">ADD ALBUM</Link>
                 <Link href="/admin/backlog">VIEW BACKLOG</Link>
                 <Link href="/api/auth/signout">SIGNOUT</Link>

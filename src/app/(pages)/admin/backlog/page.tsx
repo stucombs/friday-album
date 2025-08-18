@@ -58,7 +58,7 @@ function BackLog () {
             <main className="main">
                 <Home></Home>
                 <Link href="/admin">RETURN TO ADMIN</Link>
-                <h2>ALBUM BACKLOG</h2>
+                <h3>ALBUM BACKLOG</h3>
                 { loading && <Loader></Loader> }
                 { error && <p className="error">{ error }</p> }
                 { !loading && !error && 
@@ -67,14 +67,14 @@ function BackLog () {
                     )
                 }
                 <div className={styles['button-container']}>
-                    { page > 1 && 
-                        <button type="button" onClick={prevPage} className={styles.paginate}>
-                            Prev
+                    { page > 1 &&
+                        <button type="button" className="btn btn-info" onClick={prevPage}>
+                            &lt;&nbsp;Previous
                         </button>
                     }
-                    { page < meta.totalPages &&
-                        <button type="button" onClick={nextPage} className={styles.paginate}>
-                            Next
+                    { page < meta.totalPages && 
+                        <button type="button" className="btn btn-info" onClick={nextPage}>
+                            Next&nbsp;&gt;
                         </button>
                     }
                 </div>

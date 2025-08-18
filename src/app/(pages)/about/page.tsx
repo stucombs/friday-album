@@ -8,7 +8,7 @@ export default function About () {
         <div className="page">
             <main className="main">
                 <Home></Home>
-                <h2>WHY FRIDAY</h2>
+                <h3>WHY FRIDAY</h3>
                 <p>More coming soon, please check back later...</p>
             </main>
             <Footer></Footer>
