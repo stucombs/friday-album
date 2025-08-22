@@ -87,6 +87,10 @@ a {
     text-decoration-thickness: 8px;
     text-decoration-color: rgba(250, 247, 80, 0.6);
   }
+
+  a.discord:hover {
+    text-decoration-color: rgba(201, 70, 244, 0.6);
+  }
 }
 
 @media (hover: none) and (pointer: coarse) {
@@ -95,6 +99,10 @@ a {
     text-decoration-line: line-through;
     text-decoration-thickness: 8px;
     text-decoration-color: rgba(250, 247, 80, 0.6);
+  }
+
+  a.discord {
+    text-decoration-color: rgba(201, 70, 244, 0.6);
   }
 }
 
