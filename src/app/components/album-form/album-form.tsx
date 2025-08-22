@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import styles from './add-album.module.css';
+import styles from './album-form.module.css';
 import { getGenres } from '@/lib/services/genre.service';
 import { createAlbum } from '@/lib/services/albums.service';
 import { IGenre } from '@/types';
@@ -53,6 +53,11 @@ export default function AddAlbumForm () {
         e: React.FormEvent<HTMLFormElement>
     ) => {
         e.preventDefault();
+        setError('');
+        setSuccess('');
+
+        if( !validateMusicUrls() ) return false;
+
         const response = await createAlbum(formData);
 
         if( response.error ){
@@ -63,6 +68,28 @@ export default function AddAlbumForm () {
             setSuccess('Album created successfully ✅');
             setFormData(intialState);
         }
+    };
+
+    const validateMusicUrls = (): boolean => {
+        let pattern: RegExp;
+
+        // Check AppleMusic link
+        pattern = /^https:\/\/music\.apple\.com\/.*album.*$/;
+        if( !pattern.test(formData.am_link) ){
+            setError('Apple Music link does not appear to be a valid link to an album');
+
+            return false;
+        }
+
+        // Check Spotify link
+        pattern = /^https:\/\/open\.spotify\.com\/album\/.+/;
+        if( !pattern.test(formData.spotify_link) ){
+            setError('Spotify link does not appear to be a valid link to an album');
+
+            return false;
+        }
+
+        return true;
     };
 
     return (
@@ -138,6 +165,19 @@ export default function AddAlbumForm () {
                 value={formData.cover_url}
                 onChange={handleChange}
             />
+            { formData.cover_url && 
+                <img
+                    id="cover_preview"
+                    src={formData.cover_url}
+                    alt="Cover Preview"
+                    height={90}
+                    width={90}
+                    onError={(e) => {
+                        (e.currentTarget.src = "");
+                        setError("Invalid Image URL");
+                    }}
+                />
+            }
             <input
                 type="text"
                 className="input input-md col-100"

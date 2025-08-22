@@ -4,6 +4,6 @@ export * from './cover';
 export * from './footer';
 export * from './home';
 export * from './loader';
-export * from './add-album';
+export * from './album-form';
 export * from './no-access';
 export * from './album-log';

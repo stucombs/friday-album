@@ -1,11 +1,11 @@
 .plainlink {
-    border: none;
-    background-color: inherit;
-    text-decoration: underline;
-    color: cornflowerblue;
-    font-size: 12px;
-    cursor: pointer;
-    justify-self: baseline;
+  border: none;
+  background-color: inherit;
+  text-decoration: underline;
+  color: cornflowerblue;
+  font-size: 12px;
+  cursor: pointer;
+  justify-self: baseline;
 }
 
 .formsubmit {
