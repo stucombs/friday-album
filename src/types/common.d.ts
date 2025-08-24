@@ -11,7 +11,7 @@ export interface IAlbum {
 };
 
 export interface IGenre {
-    id?: number;
+    id: number;
     name: string;
     created_at?: Date;
     updated_at?: Date;

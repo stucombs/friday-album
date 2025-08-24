@@ -9,7 +9,8 @@ export const getGenres = async (): Promise<IGenre[]> => {
         .select(`
             id,
             name
-        `);
+        `)
+        .order('name', { ascending: true });
     
     if( error ) throw error;
 
@@ -28,7 +29,7 @@ export const getGenreById = async (id: number): Promise<IGenre> => {
     return data;
 };
 
-export const createGenre = async (payload: IGenre) => {
+export const createGenre = async (payload: any) => {
     const { data, error } = await supabase
         .from('genre')
         .insert([
