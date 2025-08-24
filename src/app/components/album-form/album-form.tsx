@@ -17,7 +17,7 @@ const intialState = {
     cover_url: ''
 };
 
-export default function AddAlbumForm ({ data }: { data: any }) {
+export default function AddAlbumForm ({ data }: { data?: any }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
