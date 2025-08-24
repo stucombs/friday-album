@@ -3,6 +3,7 @@ import styles from './album-log.module.css';
 import { promoteAlbum, deleteAlbum } from '@/lib/services/albums.service';
 import { IAlbum } from '@/types/common';
 import { useState } from 'react';
+import { EditAlbum }from '../edit-album';
 
 export default function AlbumLog ({data}: { data: IAlbum}) {
     const [loadingPromote, setLoadingPromote] = useState(false);
@@ -10,6 +11,7 @@ export default function AlbumLog ({data}: { data: IAlbum}) {
     const [successPromote, setSuccessPromote] = useState(false);
     const [successDelete, setSuccessDelete] = useState(false);
     const [error, setError] = useState('');
+    const [editAlbum, setEditAlbum] = useState(false);
 
     const onPromoteAlbum = async () => {
         setLoadingPromote(true);
@@ -40,37 +42,44 @@ export default function AlbumLog ({data}: { data: IAlbum}) {
     };
 
     return (
-        <div className="card-xl card-width bg-base-300 gap-10">
-            <div className="card-body log-album">
-                <div className={styles.cardinfo}>
-                    <h3 className="card-title">{ data?.title }</h3>
-                    <p className={ styles.artist }>{ data?.artist }</p>
-                    <p>Released: { data?.release_year }</p>
-                    <p className={ styles.genre }>Genre: { data?.genre.name }</p>
-                    <p className="error">{ error }</p>
-                </div>
-                <div className={ styles.buttoncol }>
-                    <div>
-                        <button type="button" className="btn btn-sm btn-success" onClick={onPromoteAlbum} disabled={!data || loadingPromote}>
-                            PROMOTE&nbsp;
-                                { loadingPromote && <span className="loading loading-spinner"></span> }
-                                { successPromote && <span>✅</span> }
-                        </button>
+        <>
+            <EditAlbum
+                isOpen={editAlbum}
+                data={data}
+                onClose={() => setEditAlbum(false)}
+            ></EditAlbum>
+            <div className="card-xl card-width bg-base-300 gap-10">
+                <div className="card-body log-album">
+                    <div className={styles.cardinfo}>
+                        <h3 className="card-title">{ data?.title }</h3>
+                        <p className={ styles.artist }>{ data?.artist }</p>
+                        <p>Released: { data?.release_year }</p>
+                        <p className={ styles.genre }>Genre: { data?.genre.name }</p>
+                        <p className="error">{ error }</p>
                     </div>
-                    <div>
-                        <button type="button" className="btn btn-sm btn-info" disabled>
-                            EDIT
-                        </button>
-                    </div>
-                    <div>
-                        <button type="button" className="btn btn-sm btn-error" onClick={onDeleteAlbum} disabled={!data || loadingDelete}>
-                            DELETE&nbsp;
-                                { loadingDelete && <span className="loading loading-spinner"></span> }
-                                { successDelete && <span>✅</span> }
-                        </button>
+                    <div className={ styles.buttoncol }>
+                        <div>
+                            <button type="button" className="btn btn-sm btn-success" onClick={onPromoteAlbum} disabled={!data || loadingPromote}>
+                                PROMOTE&nbsp;
+                                    { loadingPromote && <span className="loading loading-spinner"></span> }
+                                    { successPromote && <span>✅</span> }
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" className="btn btn-sm btn-info" onClick={() => setEditAlbum(true)} disabled={!data}>
+                                EDIT
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" className="btn btn-sm btn-error" onClick={onDeleteAlbum} disabled={!data || loadingDelete}>
+                                DELETE&nbsp;
+                                    { loadingDelete && <span className="loading loading-spinner"></span> }
+                                    { successDelete && <span>✅</span> }
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

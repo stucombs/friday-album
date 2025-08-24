@@ -53,8 +53,8 @@ export default function EditGenres ({ isOpen, onClose, genres, onChanged }: {
 
   return (
     <>
-      <input type="checkbox" id="my-modal" className="modal-toggle" checked={isOpen} onChange={onClose} />
-      <dialog id="my_modal_1" className="modal">
+      <input type="checkbox" id="edit-genre-modal-checkbox" className="modal-toggle" checked={isOpen} onChange={onClose} />
+      <dialog id="edit-genre-modal" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Edit Genres</h3>
           <br />

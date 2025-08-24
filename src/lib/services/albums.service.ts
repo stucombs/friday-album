@@ -162,3 +162,24 @@ export const deleteAlbum = async (id: number) => {
 
     return data;
 };
+
+export const editAlbum = async (payload: any) => {
+  const { data, error } = await supabase
+    .from('albums')
+    .update({
+      title: payload.title,
+      artist: payload.artist,
+      release_year: payload.release_year,
+      number_tracks: payload.number_tracks,
+      genre_id: payload.genre_id,
+      cover_url: payload.cover_url,
+      spotify_link: payload.spotify_link,
+      am_link: payload.am_link,
+      updated_at: new Date()
+    })
+    .eq('id', payload.id);
+
+    if( error ) throw error;
+
+    return data;
+};

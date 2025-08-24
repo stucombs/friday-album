@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import styles from './album-form.module.css';
 import { getGenres } from '@/lib/services/genre.service';
-import { createAlbum } from '@/lib/services/albums.service';
+import { createAlbum, editAlbum } from '@/lib/services/albums.service';
 import { IGenre } from '@/types';
 import { EditGenres } from '../edit-genres';
 
@@ -17,7 +17,7 @@ const intialState = {
     cover_url: ''
 };
 
-export default function AddAlbumForm () {
+export default function AddAlbumForm ({ data }: { data: any }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -27,6 +27,12 @@ export default function AddAlbumForm () {
 
     useEffect(() => {
         loadGenres();
+        if( data ){
+            setFormData(prev => ({
+                ...prev,
+                ...data
+            }));
+        };
     }, []);
 
     const loadGenres = async () => {
@@ -55,19 +61,36 @@ export default function AddAlbumForm () {
         e: React.FormEvent<HTMLFormElement>
     ) => {
         e.preventDefault();
+        setLoading(true);
         setError('');
         setSuccess('');
 
         if( !validateMusicUrls() ) return false;
 
+        if( data ) {
+            try {
+                const response = await editAlbum(formData);
+                setSuccess('Album edited successfullly ✅');
+                setLoading(false);
+            } catch(err: any) {
+                console.error(err.message);
+                setError('An error occurred editing album');
+                setLoading(false);
+            }
+
+            return;
+        }
+
         const response = await createAlbum(formData);
 
         if( response.error ){
             setError(response.error);
+            setLoading(false);
         }
 
         if( response.data ){
             setSuccess('Album created successfully ✅');
+            setLoading(false);
             setFormData(intialState);
         }
     };
@@ -139,9 +162,12 @@ export default function AddAlbumForm () {
                             </option>
                         )}
                     </select>
-                    <button type="button" className={styles.plainlink} onClick={() => setEditGenres(true)}>
-                        Edit Genres
-                    </button>
+                    { /* Hide the 'edit genres' if editing an existing album */ }
+                    { !data &&
+                        <button type="button" className={styles.plainlink} onClick={() => setEditGenres(true)}>
+                            Edit Genres
+                        </button>
+                    }
                 </div>
                 <div className={styles.double}>
                     <input
