@@ -10,8 +10,6 @@ import { IAlbum } from '@/types/common';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/services/auth.service';
 
-export const dynamic = 'force-dynamic';
-
 export default async function Home() {
   const activeAlbum: IAlbum = await getActiveAlbum();
   const session = await getServerSession(authOptions);
@@ -22,7 +20,10 @@ export default async function Home() {
           <PageTitle></PageTitle>
           <Cover data={activeAlbum?.cover_url}></Cover>
           <Album data={activeAlbum}></Album>
-          <Link href="/about">WHY FRIDAY</Link>
+          <div className="relative inline-block">
+            <Link href="/about">WHY FRIDAY</Link>
+            <span className="badge badge-xs bage-soft badge-secondary absolute -top-2 -right-4">new</span>
+          </div>
           <Link href="https://discord.gg/mW26JsW3SK" target="_blank" rel="noopener noreferrer" className="discord">
             JOIN THE DISCUSSION
           </Link>
