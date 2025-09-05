@@ -25,12 +25,12 @@ function AddAlbum(){
       <Footer></Footer>
     </div>
   );
-};
+}
 
 export default function AuthWrapper () {
   return (
     <SessionProvider>
-        <AddAlbum />
+      <AddAlbum />
     </SessionProvider>
   );
-};
+}

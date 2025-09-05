@@ -1,9 +1,9 @@
 'use client';
 import {
-    Home,
-    Footer,
-    NoAccess,
-    Loader
+  Home,
+  Footer,
+  NoAccess,
+  Loader
 } from '@/app/components';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
@@ -81,7 +81,7 @@ function BackLog () {
       <Footer></Footer>
     </div>
   );
-};
+}
 
 export default function Backlog () {
   return (
@@ -89,4 +89,4 @@ export default function Backlog () {
       <BackLog />
     </SessionProvider>
   );
-};
+}

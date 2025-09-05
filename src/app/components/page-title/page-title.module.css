@@ -1,4 +1,4 @@
-.page-title {
+.pageTitle {
   width: fit-content;
   font-weight: bold;
   font-family: monospace;
@@ -7,13 +7,13 @@
     0 0 0 rgb(0 255 0), 
     0 0 0 rgb(0 0 255);
   font-size: 40px;
-  animation: l32 1s infinite cubic-bezier(0.5,-2000,0.5,2000);
+  animation: glitch 1s infinite cubic-bezier(0.5,-2000,0.5,2000);
 }
-.page-title:before {
+.pageTitle:before {
   content: "FRIDAY ALBUM"
 }
 
-@keyframes l32{
+@keyframes glitch {
   25%,100% {
   text-shadow: 
      0.03px -0.01px 0.01px rgb(255 0 0), 
