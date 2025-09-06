@@ -3,7 +3,6 @@ import { createGenre, deleteGenre } from '@/lib/services/genre.service';
 import { IGenre } from '@/types';
 import { useState  } from 'react';
 import { Loader } from '@/app/components';
-import styles from './edit-genres.module.css';
 
 export default function EditGenres ({ isOpen, onClose, genres, onChanged }: {
   isOpen: boolean,
@@ -23,8 +22,12 @@ export default function EditGenres ({ isOpen, onClose, genres, onChanged }: {
       onChanged();
       setLoading(false);
     } catch(err: any) {
-      console.error(err.message);
-      setError("Failed to delete genre");
+      console.error(err.code);
+      if( err.code === "23503" ){
+        setError("Cannot delete genre linked to an existing album");
+      } else {
+        setError("Failed to delete genre");
+      }
       setLoading(false);
     }
   };
@@ -59,22 +62,22 @@ export default function EditGenres ({ isOpen, onClose, genres, onChanged }: {
           <h3 className="font-bold text-lg">Edit Genres</h3>
           <br />
           { loading && <Loader></Loader>}
-          <div className={styles.list}>
+          <div className="flex flex-col gap-4">
             { genres.map(genre => (
-              <div key={genre.id} className={styles['genre-item']}>
+              <div key={genre.id} className="flex flex-row items-center gap-2.5">
                 <button className="btn btn-sm btn-outline btn-error" onClick={() => removeGenre(genre.id)}>
                   X
                 </button>
-                <p className={styles.capitalize}>{ genre.name }</p>
+                <p className="capitalize">{ genre.name }</p>
               </div>
             ))}
           </div>
           <br />
-          <div className={styles.add}>
+          <div className="flex flex-row items-center gap-4">
             <input
               type="text"
               placeholder="Add Genre"
-              className="input input-md col-50"
+              className="input input-md w-1/2"
               id="genre"
               name="genre"
               value={genreInput}
