@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-
 @plugin "daisyui" {
   themes:
     emerald --default,
@@ -11,12 +10,6 @@ body {
   overflow-x: hidden;
   padding: 0;
   margin: 0;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -61,11 +54,7 @@ a {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  html,
-  body {
-    /* color: white; */
-  }
+@media (prefers-color-scheme: light) {
   .logo {
     filter: invert();
   }
@@ -104,37 +93,46 @@ a {
   }
 }
 
-/* FORMS */
-.col-100 {
-  width: 100%;
+.plain-link {
+  border: none;
+  background-color: inherit;
+  text-decoration: underline;
+  color: cornflowerblue;
+  font-size: 12px;
+  cursor: pointer;
+  justify-self: baseline;
 }
 
-.col-75 {
-  width: 75%;
+/* PAGE TITLE */
+.page-title {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  text-shadow:
+    0 0 0 rgb(255 0 0),
+    0 0 0 rgb(0 255 0),
+    0 0 0 rgb(0 0 255);
+  font-size: 40px;
+  animation: glitch 1s infinite cubic-bezier(0.5, -2000, 0.5, 2000);
+}
+.page-title:before {
+  content: 'FRIDAY ALBUM';
 }
 
-.col-50 {
-  width: 50%;
-}
-
-.col-25 {
-  width: 25%;
+@keyframes glitch {
+  25%,
+  100% {
+    text-shadow:
+      0.03px -0.01px 0.01px rgb(255 0 0),
+      0.02px 0.02px 0 rgb(0 255 0),
+      -0.02px 0.02px 0 rgb(0 0 255);
+  }
 }
 
 /* CARDS */
-.card-body {
-  padding: 0.75em;
-  gap: 0.5em;
-}
-
 .card-width {
   width: 30vw;
   border-radius: 18px;
-}
-
-.log-album {
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 @media (max-width: 600px) {
@@ -142,8 +140,49 @@ a {
     width: 80vw;
   }
 }
-/* CD CSS IMAGE */
 
+/* FOOTER */
+.page-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  font-size: 16px;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .page-footer a:hover {
+    color: inherit;
+    text-decoration-line: line-through;
+    text-decoration-thickness: 8px;
+    text-decoration-color: rgba(250, 247, 80, 0.6);
+  }
+}
+
+/* Media query for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .page-footer a {
+    text-decoration: underline;
+  }
+}
+
+/* LOADER */
+.loader {
+  width: 120px;
+  height: 20px;
+  background: linear-gradient(90deg, #0001 33%, #0005 50%, #0001 66%) #f2f2f2;
+  background-size: 300% 100%;
+  animation: l1 1s infinite linear;
+}
+
+@keyframes l1 {
+  0% {
+    background-position: right;
+  }
+}
+
+/* CD CSS IMAGE */
 .cd {
   position: relative;
   animation: spin 20s linear infinite;

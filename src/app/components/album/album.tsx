@@ -8,8 +8,8 @@ export default function Album({ data }: { data?: IAlbum }) {
   return (
     <div className="card-xl card-width bg-base-300">
       <div className="p-3 gap-2 flex flex-col items-center">
-        <h3 className="card-title">{data?.title}</h3>
-        <p className="italic text-lg">{data?.artist}</p>
+        <p className="card-title">{data?.title}</p>
+        <p className="italic">{data?.artist}</p>
         <p>Released: {data?.release_year}</p>
         <p className="capitalize">Genre: {data?.genre.name}</p>
         <div className="flex flex-row justify-center gap-4">

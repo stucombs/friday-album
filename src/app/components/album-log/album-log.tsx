@@ -1,5 +1,4 @@
 'use client';
-import styles from './album-log.module.css';
 import { promoteAlbum, deleteAlbum } from '@/lib/services/albums.service';
 import { IAlbum } from '@/types/common';
 import { useState } from 'react';
@@ -48,16 +47,16 @@ export default function AlbumLog({ data }: { data: IAlbum }) {
         data={data}
         onClose={() => setEditAlbum(false)}
       ></EditAlbum>
-      <div className="card-xl card-width bg-base-300 gap-10">
-        <div className="card-body log-album">
-          <div className={styles.cardinfo}>
-            <h3 className="card-title">{data?.title}</h3>
-            <p className={styles.artist}>{data?.artist}</p>
+      <div className="card-xl card-width bg-base-300">
+        <div className="p-3 gap-2 flex flex-row justify-between">
+          <div className="flex flex-col gap-2">
+            <p className="card-title">{data?.title}</p>
+            <p className="italic">{data?.artist}</p>
             <p>Released: {data?.release_year}</p>
-            <p className={styles.genre}>Genre: {data?.genre.name}</p>
+            <p className="capitalize">Genre: {data?.genre.name}</p>
             <p className="error">{error}</p>
           </div>
-          <div className={styles.buttoncol}>
+          <div className="flex flex-col items-end gap-2">
             <div>
               <button
                 type="button"

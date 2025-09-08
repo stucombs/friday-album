@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState } from 'react';
-import styles from './album-form.module.css';
 import { getGenres } from '@/lib/services/genre.service';
 import { createAlbum, editAlbum } from '@/lib/services/albums.service';
 import { IGenre } from '@/types';
@@ -125,11 +124,11 @@ export default function AddAlbumForm({ data }: { data?: any }) {
         genres={genres}
         onChanged={() => loadGenres()}
       ></EditGenres>
-      <form onSubmit={handleSubmit} className={styles.formsubmit}>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2 min-w-[32vw]">
         <input
           type="text"
           placeholder="Title"
-          className="input input-md col-100"
+          className="input input-md w-full"
           id="title"
           name="title"
           value={formData.title}
@@ -138,7 +137,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
         />
         <input
           type="text"
-          className="input input-md col-100"
+          className="input input-md w-full"
           placeholder="Artist"
           name="artist"
           id="artist"
@@ -146,10 +145,10 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           onChange={handleChange}
           required
         />
-        <div className={styles.double}>
+        <div className="flex flex-row gap-4">
           <select
             defaultValue="0"
-            className="select col-75"
+            className="select col-3/4"
             onChange={handleChange}
             id="genre_id"
             name="genre_id"
@@ -167,17 +166,17 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           {!data && (
             <button
               type="button"
-              className={styles.plainlink}
+              className="plain-link"
               onClick={() => setEditGenres(true)}
             >
               Edit Genres
             </button>
           )}
         </div>
-        <div className={styles.double}>
+        <div className="flex flex-row gap-4">
           <input
             type="number"
-            className="input input-md col-25"
+            className="input input-md col-1/4"
             placeholder="Release Year"
             min="1900"
             max="2100"
@@ -189,7 +188,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           />
           <input
             type="number"
-            className="input input-md col-25"
+            className="input input-md col-1/4"
             placeholder="# of tracks"
             min="1"
             max="50"
@@ -201,7 +200,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
         </div>
         <input
           type="text"
-          className="input input-md col-100"
+          className="input input-md w-full"
           placeholder="Cover URL"
           name="cover_url"
           id="cover_url"
@@ -223,7 +222,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
         )}
         <input
           type="text"
-          className="input input-md col-100"
+          className="input input-md w-full"
           placeholder="Apple Music Link"
           name="am_link"
           id="am_link"
@@ -232,14 +231,14 @@ export default function AddAlbumForm({ data }: { data?: any }) {
         />
         <input
           type="text"
-          className="input input-md col-100"
+          className="input input-md w-full"
           placeholder="Spotify Link"
           name="spotify_link"
           id="spotify_link"
           value={formData.spotify_link}
           onChange={handleChange}
         />
-        <div className={styles.bcontainer}>
+        <div className="flex justify-center">
           <button
             type="submit"
             className="btn btn-active btn-success"
@@ -252,12 +251,12 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           </button>
         </div>
         {error && (
-          <div className={styles.bcontainer}>
+          <div className="flex justify-center">
             <p className="error">{error}</p>
           </div>
         )}
         {success && (
-          <div className={styles.bcontainer}>
+          <div className="flex justify-center">
             <p className="success">{success}</p>
           </div>
         )}
