@@ -8,20 +8,20 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         password: {
           label: 'Password',
-          type: 'password',
-        },
+          type: 'password'
+        }
       },
-      async authorize(credentials, _request) {
+      async authorize(credentials) {
         if (credentials?.password == process.env.BASIC_AUTH_PASSWORD) {
           return { id: '0' };
         } else {
           return null;
         }
-      },
-    }),
+      }
+    })
   ],
   session: {
-    strategy: 'jwt',
+    strategy: 'jwt'
   },
-  secret: 'fridayalbum',
+  secret: 'fridayalbum'
 };

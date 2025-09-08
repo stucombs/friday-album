@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next"
-import "./styles/globals.css";
+import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
+import './styles/globals.css';
 
 export const metadata: Metadata = {
-  title: "Friday Album",
-  description: "A group listening concept",
+  title: 'Friday Album',
+  description: 'A group listening concept'
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
