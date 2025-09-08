@@ -1,7 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @plugin "daisyui" {
-  themes: emerald --default, business --prefersdark;
+  themes:
+    emerald --default,
+    business --prefersdark;
 }
 
 html,
@@ -68,7 +70,6 @@ a {
     filter: invert();
   }
 }
-
 
 @media (prefers-color-scheme: dark) {
   html {
@@ -150,7 +151,38 @@ a {
   height: 180px;
   border-radius: 100%;
   border: 1px solid grey;
-  background: conic-gradient(white, white, white, grey, grey, violet, deepskyblue, aqua, palegreen, yellow, orange, red, grey, grey, white, white, white, white, grey, grey, violet, deepskyblue, aqua, palegreen, yellow, orange, red, grey, grey, white);
+  background: conic-gradient(
+    white,
+    white,
+    white,
+    grey,
+    grey,
+    violet,
+    deepskyblue,
+    aqua,
+    palegreen,
+    yellow,
+    orange,
+    red,
+    grey,
+    grey,
+    white,
+    white,
+    white,
+    white,
+    grey,
+    grey,
+    violet,
+    deepskyblue,
+    aqua,
+    palegreen,
+    yellow,
+    orange,
+    red,
+    grey,
+    grey,
+    white
+  );
 }
 
 .cd::before,
@@ -169,7 +201,7 @@ a {
   height: 30%;
   margin: -15% 0 0 -15%;
   background: lightgrey;
-  background-clip: padding-box; 
+  background-clip: padding-box;
   border: 10px solid rgba(0, 0, 0, 0.2);
 }
 
