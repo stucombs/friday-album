@@ -1,8 +1,9 @@
 'use client';
+import { useState } from 'react';
+
+import { Loader } from '@/app/components';
 import { createGenre, deleteGenre } from '@/lib/services/genre.service';
 import { IGenre } from '@/types';
-import { useState } from 'react';
-import { Loader } from '@/app/components';
 
 export default function EditGenres({
   isOpen,

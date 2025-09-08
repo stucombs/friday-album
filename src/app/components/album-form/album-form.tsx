@@ -1,9 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { getGenres } from '@/lib/services/genre.service';
-import { createAlbum, editAlbum } from '@/lib/services/albums.service';
-import { IGenre } from '@/types';
+
 import { EditGenres } from '../edit-genres';
+
+import { createAlbum, editAlbum } from '@/lib/services/albums.service';
+import { getGenres } from '@/lib/services/genre.service';
+import { IGenre } from '@/types';
 
 const intialState = {
   title: '',
@@ -124,7 +126,10 @@ export default function AddAlbumForm({ data }: { data?: any }) {
         genres={genres}
         onChanged={() => loadGenres()}
       ></EditGenres>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 min-w-[32vw]">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-2 min-w-[32vw]"
+      >
         <input
           type="text"
           placeholder="Title"

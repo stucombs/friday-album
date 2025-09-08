@@ -1,6 +1,7 @@
 'use client';
-import { IAlbum } from '@/types/common';
 import Image from 'next/image';
+
+import { IAlbum } from '@/types/common';
 
 export default function Album({ data }: { data?: IAlbum }) {
   if (!data) return <p>No album active, check back later!</p>;
