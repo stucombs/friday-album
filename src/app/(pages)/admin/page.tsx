@@ -1,16 +1,12 @@
-import {
-  Home,
-  Footer,
-  NoAccess
-} from '@/app/components';
+import { Home, Footer, NoAccess } from '@/app/components';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/services/auth.service';
 import Link from 'next/link';
 
-export default async function Admin () {
+export default async function Admin() {
   const session = await getServerSession(authOptions);
 
-  if( !session ) return <NoAccess></NoAccess>;
+  if (!session) return <NoAccess></NoAccess>;
 
   return (
     <div className="page">

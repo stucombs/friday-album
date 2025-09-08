@@ -1,14 +1,19 @@
 'use client';
 import { createGenre, deleteGenre } from '@/lib/services/genre.service';
 import { IGenre } from '@/types';
-import { useState  } from 'react';
+import { useState } from 'react';
 import { Loader } from '@/app/components';
 
-export default function EditGenres ({ isOpen, onClose, genres, onChanged }: {
-  isOpen: boolean,
-  onClose: () => void,
-  genres: IGenre[],
-  onChanged: () => void
+export default function EditGenres({
+  isOpen,
+  onClose,
+  genres,
+  onChanged
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  genres: IGenre[];
+  onChanged: () => void;
 }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -21,12 +26,12 @@ export default function EditGenres ({ isOpen, onClose, genres, onChanged }: {
       await deleteGenre(id);
       onChanged();
       setLoading(false);
-    } catch(err: any) {
+    } catch (err: any) {
       console.error(err.code);
-      if( err.code === "23503" ){
-        setError("Cannot delete genre linked to an existing album");
+      if (err.code === '23503') {
+        setError('Cannot delete genre linked to an existing album');
       } else {
-        setError("Failed to delete genre");
+        setError('Failed to delete genre');
       }
       setLoading(false);
     }
@@ -44,11 +49,11 @@ export default function EditGenres ({ isOpen, onClose, genres, onChanged }: {
       setGenreInput('');
       onChanged();
       setLoading(false);
-    } catch(err: any) {
-      if( err?.code === "23505" ){
-        setError("Genre aleady exists");
+    } catch (err: any) {
+      if (err?.code === '23505') {
+        setError('Genre aleady exists');
       } else {
-        setError("Failed to add genre");
+        setError('Failed to add genre');
       }
       setLoading(false);
     }
@@ -56,19 +61,31 @@ export default function EditGenres ({ isOpen, onClose, genres, onChanged }: {
 
   return (
     <>
-      <input type="checkbox" id="edit-genre-modal-checkbox" className="modal-toggle" checked={isOpen} onChange={onClose} />
+      <input
+        type="checkbox"
+        id="edit-genre-modal-checkbox"
+        className="modal-toggle"
+        checked={isOpen}
+        onChange={onClose}
+      />
       <dialog id="edit-genre-modal" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Edit Genres</h3>
           <br />
-          { loading && <Loader></Loader>}
+          {loading && <Loader></Loader>}
           <div className="flex flex-col gap-4">
-            { genres.map(genre => (
-              <div key={genre.id} className="flex flex-row items-center gap-2.5">
-                <button className="btn btn-sm btn-outline btn-error" onClick={() => removeGenre(genre.id)}>
+            {genres.map((genre) => (
+              <div
+                key={genre.id}
+                className="flex flex-row items-center gap-2.5"
+              >
+                <button
+                  className="btn btn-sm btn-outline btn-error"
+                  onClick={() => removeGenre(genre.id)}
+                >
                   X
                 </button>
-                <p className="capitalize">{ genre.name }</p>
+                <p className="capitalize">{genre.name}</p>
               </div>
             ))}
           </div>
@@ -83,12 +100,17 @@ export default function EditGenres ({ isOpen, onClose, genres, onChanged }: {
               value={genreInput}
               onChange={(e) => setGenreInput(e.target.value)}
             />
-            <button type="button" className="btn btn-sm btn-success" disabled={loading} onClick={submitGenre}>
+            <button
+              type="button"
+              className="btn btn-sm btn-success"
+              disabled={loading}
+              onClick={submitGenre}
+            >
               Add
             </button>
           </div>
-          { error && <span className="error">{ error }</span> }
-          { success && <span className="success">{ success }</span>}
+          {error && <span className="error">{error}</span>}
+          {success && <span className="success">{success}</span>}
           <div className="modal-action">
             <form method="dialog">
               <button className="btn" onClick={onClose} disabled={loading}>

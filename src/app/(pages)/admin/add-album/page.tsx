@@ -1,18 +1,13 @@
 'use client';
-import {
-  Footer,
-  Home,
-  AddAlbumForm,
-  NoAccess
-} from '@/app/components';
+import { Footer, Home, AddAlbumForm, NoAccess } from '@/app/components';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
-function AddAlbum(){
-  const { data: session, status } = useSession();
+function AddAlbum() {
+  const { status } = useSession();
 
-  if( status === 'unauthenticated' ) return <NoAccess></NoAccess>;
+  if (status === 'unauthenticated') return <NoAccess></NoAccess>;
 
   return (
     <div className="page">
@@ -27,7 +22,7 @@ function AddAlbum(){
   );
 }
 
-export default function AuthWrapper () {
+export default function AuthWrapper() {
   return (
     <SessionProvider>
       <AddAlbum />
