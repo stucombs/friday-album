@@ -7,9 +7,16 @@
 
 html,
 body {
+  font-family: var(--font-tomorrow);
   overflow-x: hidden;
   padding: 0;
   margin: 0;
+}
+
+h3 {
+  font-size: 32px;
+  letter-spacing: 0.075em;
+  border-bottom: 1px solid var(--color-primary);
 }
 
 a {
@@ -106,13 +113,12 @@ a {
 /* PAGE TITLE */
 .page-title {
   width: fit-content;
-  font-weight: bold;
-  font-family: monospace;
+  font-family: var(--font-marker);
   text-shadow:
     0 0 0 rgb(255 0 0),
     0 0 0 rgb(0 255 0),
     0 0 0 rgb(0 0 255);
-  font-size: 40px;
+  font-size: 45px;
   animation: glitch 1s infinite cubic-bezier(0.5, -2000, 0.5, 2000);
 }
 .page-title:before {
