@@ -20,6 +20,11 @@ export const authOptions: NextAuthOptions = {
       }
     })
   ],
+  callbacks: {
+    async redirect({ url }) {
+      return url;
+    }
+  },
   session: {
     strategy: 'jwt'
   },

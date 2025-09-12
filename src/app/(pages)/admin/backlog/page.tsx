@@ -34,13 +34,13 @@ function BackLog() {
     loadAlbums();
   }, [page]);
 
-  const nextPage = () => {
+  const nextPage = (): void => {
     if (page < meta.totalPages) {
       setPage(page + 1);
     }
   };
 
-  const prevPage = () => {
+  const prevPage = (): void => {
     if (page > 1) {
       setPage(page - 1);
     }
