@@ -1,11 +1,8 @@
+import { PageTitle, Album, Cover, Footer } from '@components';
+import { getActiveAlbum } from '@lib/services/albums.service';
+import { authOptions } from '@lib/services/auth.service';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
-
-import { PageTitle, Album, Cover, Footer } from './components';
-
-import { getActiveAlbum } from '@/lib/services/albums.service';
-import { authOptions } from '@/lib/services/auth.service';
-import { IAlbum } from '@/types/common';
 
 export default async function Home() {
   const activeAlbum: IAlbum = await getActiveAlbum();

@@ -1,8 +1,7 @@
+import { Home, Footer, NoAccess } from '@components';
+import { authOptions } from '@lib/services/auth.service';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
-
-import { Home, Footer, NoAccess } from '@/app/components';
-import { authOptions } from '@/lib/services/auth.service';
 
 export default async function Admin() {
   const session = await getServerSession(authOptions);

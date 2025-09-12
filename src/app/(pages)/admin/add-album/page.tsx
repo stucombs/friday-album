@@ -1,9 +1,8 @@
 'use client';
+import { Footer, Home, AddAlbumForm, NoAccess } from '@components';
 import Link from 'next/link';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
-
-import { Footer, Home, AddAlbumForm, NoAccess } from '@/app/components';
 
 function AddAlbum() {
   const { status } = useSession();

@@ -1,13 +1,10 @@
 'use client';
+import { Home, Footer, NoAccess, Loader, AlbumLog } from '@components';
+import { getAlbumBacklog } from '@lib/services/albums.service';
 import Link from 'next/link';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
-
-import { Home, Footer, NoAccess, Loader } from '@/app/components';
-import { AlbumLog } from '@/app/components';
-import { getAlbumBacklog } from '@/lib/services/albums.service';
-import { IAlbum } from '@/types';
 
 function BackLog() {
   const { data: session, status } = useSession();

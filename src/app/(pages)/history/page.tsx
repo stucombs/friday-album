@@ -1,9 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-import { Footer, Home, Album, Loader } from '@/app/components';
-import { getPastAlbums } from '@/lib/services/albums.service';
-import { IAlbum } from '@/types/common';
+import { Footer, Home, Album, Loader } from '@components';
+import { getPastAlbums } from '@lib/services/albums.service';
 
 export default function History() {
   const [albums, setAlbums] = useState<IAlbum[]>([]);

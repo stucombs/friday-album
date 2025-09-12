@@ -1,4 +1,4 @@
-import { Footer, Home } from '../../components';
+import { Footer, Home } from '@components';
 
 export default function About() {
   return (
