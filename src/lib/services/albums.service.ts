@@ -1,5 +1,4 @@
-import { createClient } from '@/lib/supabase/client';
-import { IAlbum, IAlbumDto } from '@/types';
+import { createClient } from '@lib/supabase/client';
 
 const supabase = createClient();
 

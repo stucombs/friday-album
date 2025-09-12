@@ -1,6 +1,6 @@
 'use client';
-import { AddAlbumForm } from '@/app/components/album-form';
-import { IAlbum } from '@/types';
+
+import { AddAlbumForm } from '@components/album-form';
 
 export default function EditAlbum({
   isOpen,

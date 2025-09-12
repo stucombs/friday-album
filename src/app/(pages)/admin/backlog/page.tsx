@@ -1,4 +1,5 @@
 'use client';
+
 import { Home, Footer, NoAccess, Loader, AlbumLog } from '@components';
 import { getAlbumBacklog } from '@lib/services/albums.service';
 import Link from 'next/link';

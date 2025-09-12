@@ -1,11 +1,9 @@
 'use client';
+
+import { EditGenres } from '@components/edit-genres';
+import { createAlbum, editAlbum } from '@lib/services/albums.service';
+import { getGenres } from '@lib/services/genre.service';
 import { useEffect, useState } from 'react';
-
-import { EditGenres } from '../edit-genres';
-
-import { createAlbum, editAlbum } from '@/lib/services/albums.service';
-import { getGenres } from '@/lib/services/genre.service';
-import { IGenre } from '@/types';
 
 const intialState = {
   title: '',

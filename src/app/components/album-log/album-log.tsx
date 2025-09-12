@@ -1,10 +1,8 @@
 'use client';
+
+import { EditAlbum } from '@components/edit-album';
+import { promoteAlbum, deleteAlbum } from '@lib/services/albums.service';
 import { useState } from 'react';
-
-import { EditAlbum } from '../edit-album';
-
-import { promoteAlbum, deleteAlbum } from '@/lib/services/albums.service';
-import { IAlbum } from '@/types/common';
 
 export default function AlbumLog({ data }: { data: IAlbum }) {
   const [loadingPromote, setLoadingPromote] = useState(false);

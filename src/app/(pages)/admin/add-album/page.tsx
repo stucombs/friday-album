@@ -1,4 +1,5 @@
 'use client';
+
 import { Footer, Home, AddAlbumForm, NoAccess } from '@components';
 import Link from 'next/link';
 import { SessionProvider } from 'next-auth/react';

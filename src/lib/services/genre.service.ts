@@ -1,5 +1,4 @@
-import { createClient } from '@/lib/supabase/client';
-import { IGenre } from '@/types';
+import { createClient } from '@lib/supabase/client';
 
 const supabase = createClient();
 
