@@ -14,12 +14,7 @@ export default async function Home() {
         <PageTitle></PageTitle>
         <Cover data={activeAlbum?.cover_url}></Cover>
         <Album data={activeAlbum}></Album>
-        <div className="relative inline-block">
-          <Link href="/about">WHY FRIDAY</Link>
-          <span className="badge badge-xs bage-soft badge-secondary absolute -top-2 -right-4">
-            new
-          </span>
-        </div>
+        <Link href="/about">WHY FRIDAY</Link>
         <Link
           href="https://discord.gg/mW26JsW3SK"
           target="_blank"
