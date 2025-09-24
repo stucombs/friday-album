@@ -59,7 +59,7 @@ function BackLog() {
           albums.map((album: IAlbum) => (
             <AlbumLog data={album} key={album.id}></AlbumLog>
           ))}
-        <div className="flex flex-row gap-y-10">
+        <div className="flex flex-row gap-4">
           {page > 1 && (
             <button type="button" className="btn btn-info" onClick={prevPage}>
               &lt;&nbsp;Previous
