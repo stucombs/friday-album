@@ -20,7 +20,7 @@ export default function AlbumLog({ data }: { data: IAlbum }) {
       setLoadingPromote(false);
       setSuccessPromote(true);
     } catch (err: any) {
-      const message = `An error occurred promoting album ${data.id}: ${err.message}`;
+      const message = `An error occurred promoting album ${data.title}: ${err.message}`;
       setError(message);
       setLoadingPromote(false);
     }
@@ -34,7 +34,7 @@ export default function AlbumLog({ data }: { data: IAlbum }) {
       setLoadingDelete(false);
       setSuccessDelete(true);
     } catch (err: any) {
-      const message = `An error occurred deleting album ${data.id}: ${err.message}`;
+      const message = `An error occurred deleting album ${data.title}: ${err.message}`;
       setError(message);
       setLoadingDelete(false);
     }

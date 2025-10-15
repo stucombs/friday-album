@@ -1,7 +1,14 @@
 'use client';
 
-import { Home, Footer, NoAccess, Loader, AlbumLog } from '@components';
-import { getAlbumBacklog } from '@lib/services/albums.service';
+import {
+  Home,
+  Footer,
+  NoAccess,
+  Loader,
+  AlbumLog,
+  AlbumModal
+} from '@components';
+import { getAlbumBacklog, getRandomAlbum } from '@lib/services/albums.service';
 import Link from 'next/link';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
@@ -14,6 +21,8 @@ function BackLog() {
   const [meta, setMeta] = useState({ totalPages: 1 });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [albumModal, setAlbumModal] = useState(false);
+  const [randomAlbum, setRandomAlbum] = useState<IAlbum>();
 
   useEffect(() => {
     const loadAlbums = async () => {
@@ -44,6 +53,14 @@ function BackLog() {
     }
   };
 
+  const onSelectRandom = async (): Promise<void> => {
+    setLoading(true);
+    const result = await getRandomAlbum(false);
+    setRandomAlbum(result);
+    setAlbumModal(true);
+    setLoading(false);
+  };
+
   if (status === 'unauthenticated') return <NoAccess></NoAccess>;
 
   return (
@@ -52,6 +69,22 @@ function BackLog() {
         <Home></Home>
         <Link href="/admin">RETURN TO ADMIN</Link>
         <h3>ALBUM BACKLOG</h3>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={onSelectRandom}
+          disabled={loading}
+        >
+          Select a random album
+        </button>
+        {randomAlbum && (
+          <AlbumModal
+            isOpen={albumModal}
+            data={randomAlbum}
+            onClose={() => setAlbumModal(false)}
+            admin={true}
+          ></AlbumModal>
+        )}
         {loading && <Loader></Loader>}
         {error && <p className="error">{error}</p>}
         {!loading &&
@@ -61,12 +94,22 @@ function BackLog() {
           ))}
         <div className="flex flex-row gap-4">
           {page > 1 && (
-            <button type="button" className="btn btn-info" onClick={prevPage}>
+            <button
+              type="button"
+              className="btn btn-info"
+              onClick={prevPage}
+              disabled={loading}
+            >
               &lt;&nbsp;Previous
             </button>
           )}
           {page < meta.totalPages && (
-            <button type="button" className="btn btn-info" onClick={nextPage}>
+            <button
+              type="button"
+              className="btn btn-info"
+              onClick={nextPage}
+              disabled={loading}
+            >
               Next&nbsp;&gt;
             </button>
           )}

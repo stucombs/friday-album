@@ -5,7 +5,7 @@ const supabase = createClient();
 export const getActiveAlbum = async (): Promise<IAlbum> => {
   const { data, error } = await supabase
     .from('albums')
-    .select('*, genre ( name)')
+    .select('*, genre ( name )')
     .eq('is_active', true)
     .maybeSingle();
 
@@ -32,7 +32,7 @@ export const getAlbumBacklog = async (page: number = 1, limit: number = 8) => {
 
   const { data, error, count } = await supabase
     .from('albums')
-    .select('*, genre ( name)', { count: 'exact' })
+    .select('*, genre ( name )', { count: 'exact' })
     .eq('is_active', false)
     .eq('archived', false)
     .range(from, to)
@@ -152,4 +152,16 @@ export const editAlbum = async (payload: any) => {
   if (error) throw error;
 
   return data;
+};
+
+export const getRandomAlbum = async (
+  archived: boolean = true
+): Promise<any> => {
+  const { data, error } = await supabase.rpc('random_album', {
+    backlog: archived
+  });
+
+  if (error) throw error;
+
+  return data[0].album;
 };
