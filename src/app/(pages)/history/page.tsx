@@ -1,7 +1,7 @@
 'use client';
 
-import { Footer, Home, Album, Loader } from '@components';
-import { getPastAlbums } from '@lib/services/albums.service';
+import { Footer, Home, Album, Loader, AlbumModal } from '@components';
+import { getPastAlbums, getRandomAlbum } from '@lib/services/albums.service';
 import { useEffect, useState } from 'react';
 
 export default function History() {
@@ -10,6 +10,8 @@ export default function History() {
   const [meta, setMeta] = useState({ totalPages: 1 });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [randomAlbum, setRandomAlbum] = useState<IAlbum>();
+  const [albumModal, setAlbumModal] = useState(false);
 
   useEffect(() => {
     const loadAlbums = async () => {
@@ -36,6 +38,14 @@ export default function History() {
     if (page > 1) {
       setPage(page - 1);
     }
+  };
+
+  const onSelectRandomAlbum = async () => {
+    setLoading(true);
+    const result = await getRandomAlbum(true);
+    setRandomAlbum(result);
+    setAlbumModal(true);
+    setLoading(false);
   };
 
   if (error) {
@@ -71,14 +81,31 @@ export default function History() {
       <main className="main">
         <Home></Home>
         <h3>ALBUM HISTORY</h3>
+        <button
+          type="button"
+          className="btn btn-md btn-success"
+          onClick={onSelectRandomAlbum}
+          disabled={loading}
+        >
+          Pick a Random Album
+        </button>
         {albums.map((album: IAlbum) => (
           <Album data={album} key={album.id}></Album>
         ))}
+        {randomAlbum && (
+          <AlbumModal
+            isOpen={albumModal}
+            data={randomAlbum}
+            admin={false}
+            onClose={() => setAlbumModal(false)}
+          ></AlbumModal>
+        )}
         <div className="flex flex-row gap-4">
           {page > 1 && (
             <button
               type="button"
               className="btn btn-md btn-info"
+              disabled={loading}
               onClick={prevPage}
             >
               &lt;&nbsp;Previous

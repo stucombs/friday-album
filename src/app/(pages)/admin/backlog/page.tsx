@@ -53,7 +53,7 @@ function BackLog() {
     }
   };
 
-  const onSelectRandom = async (): Promise<void> => {
+  const onSelectRandomAlbum = async (): Promise<void> => {
     setLoading(true);
     const result = await getRandomAlbum(false);
     setRandomAlbum(result);
@@ -72,7 +72,7 @@ function BackLog() {
         <button
           type="button"
           className="btn btn-success"
-          onClick={onSelectRandom}
+          onClick={onSelectRandomAlbum}
           disabled={loading}
         >
           Select a random album
@@ -81,8 +81,8 @@ function BackLog() {
           <AlbumModal
             isOpen={albumModal}
             data={randomAlbum}
-            onClose={() => setAlbumModal(false)}
             admin={true}
+            onClose={() => setAlbumModal(false)}
           ></AlbumModal>
         )}
         {loading && <Loader></Loader>}
