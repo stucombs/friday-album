@@ -10,7 +10,6 @@ const intialState = {
   artist: '',
   release_year: '',
   genre_id: 0,
-  number_tracks: '',
   am_link: '',
   spotify_link: '',
   cover_url: ''
@@ -188,17 +187,6 @@ export default function AddAlbumForm({ data }: { data?: any }) {
             value={formData.release_year}
             onChange={handleChange}
             required
-          />
-          <input
-            type="number"
-            className="input input-md col-1/4"
-            placeholder="# of tracks"
-            min="1"
-            max="50"
-            name="number_tracks"
-            id="number_tracks"
-            value={formData.number_tracks}
-            onChange={handleChange}
           />
         </div>
         <input

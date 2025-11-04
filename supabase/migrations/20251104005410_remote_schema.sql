@@ -62,7 +62,6 @@ CREATE OR REPLACE FUNCTION "public"."random_album"("backlog" boolean) RETURNS SE
       'id', g.id,
       'name', g.name
     ),
-    'number_tracks', a.number_tracks,
     'am_link', a.am_link,
     'spotify_link', a.spotify_link,
     'cover_url', a.cover_url
@@ -89,7 +88,6 @@ CREATE TABLE IF NOT EXISTS "public"."albums" (
     "cover_url" character varying,
     "spotify_link" character varying,
     "am_link" character varying,
-    "number_tracks" integer,
     "is_active" boolean DEFAULT false NOT NULL,
     "release_year" bigint,
     "archived" boolean DEFAULT false,

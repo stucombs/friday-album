@@ -7,7 +7,6 @@ declare global {
     artist: string;
     release_year: number;
     genre: IGenre;
-    number_tracks: number;
     am_link: string;
     spotify_link: string;
     cover_url: string;
@@ -25,7 +24,6 @@ declare global {
     artist: string;
     release_year?: string;
     genre_id?: number;
-    number_tracks?: string;
     am_link?: string;
     spotify_link?: string;
     cover_url?: string;

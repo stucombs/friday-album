@@ -140,7 +140,6 @@ export const editAlbum = async (payload: any) => {
       title: payload.title,
       artist: payload.artist,
       release_year: payload.release_year,
-      number_tracks: payload.number_tracks,
       genre_id: payload.genre_id,
       cover_url: payload.cover_url,
       spotify_link: payload.spotify_link,
