@@ -24,7 +24,7 @@ export default function AlbumModal({
 
     try {
       setError('');
-      // await promoteAlbum(data.id);
+      await promoteAlbum(data.id);
       setLoading(false);
       setSuccess(true);
     } catch (err: any) {
@@ -65,11 +65,13 @@ export default function AlbumModal({
               </button>
             </form>
           </div>
+          {loading && <span className="loading loading-spinner"></span>}
           {success && (
             <span className="success">
-              Successfully promote albumt {data.title}
+              Successfully promoted album {data.title}
             </span>
           )}
+          {error && <span className="error">{error}</span>}
         </div>
       </dialog>
     </>
