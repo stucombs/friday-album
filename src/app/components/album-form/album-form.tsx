@@ -100,7 +100,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
       setError(
         'Apple Music link does not appear to be a valid link to an album'
       );
-
+      setLoading(false);
       return false;
     }
 
@@ -108,11 +108,46 @@ export default function AddAlbumForm({ data }: { data?: any }) {
     pattern = /^https:\/\/open\.spotify\.com\/album\/.+/;
     if (!pattern.test(formData.spotify_link)) {
       setError('Spotify link does not appear to be a valid link to an album');
-
+      setLoading(false);
       return false;
     }
 
     return true;
+  };
+
+  const autopopulateAlbumForm = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> => {
+    setLoading(true);
+    setFormData((prev) => ({
+      ...prev,
+      am_link: e.target.value
+    }));
+    const res = await fetch(`/api/get-album`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        url: e.target.value
+      })
+    });
+    const { data } = await res.json();
+    if (!data) {
+      setError('Failed to retrieve album info. Please try again');
+      setLoading(false);
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      spotify_link: data.spotify_link,
+      cover_url: data.cover_url,
+      title: data.title,
+      artist: data.artist
+    }));
+
+    setLoading(false);
   };
 
   return (
@@ -135,6 +170,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           name="title"
           value={formData.title}
           onChange={handleChange}
+          disabled={loading}
           required
         />
         <input
@@ -145,6 +181,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           id="artist"
           value={formData.artist}
           onChange={handleChange}
+          disabled={loading}
           required
         />
         <div className="flex flex-row gap-4">
@@ -154,6 +191,8 @@ export default function AddAlbumForm({ data }: { data?: any }) {
             onChange={handleChange}
             id="genre_id"
             name="genre_id"
+            disabled={loading}
+            required
           >
             <option disabled={true} value="0">
               Select a genre
@@ -170,6 +209,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
               type="button"
               className="plain-link"
               onClick={() => setEditGenres(true)}
+              disabled={loading}
             >
               Edit Genres
             </button>
@@ -186,6 +226,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
             id="release_year"
             value={formData.release_year}
             onChange={handleChange}
+            disabled={loading}
             required
           />
         </div>
@@ -197,6 +238,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           id="cover_url"
           value={formData.cover_url}
           onChange={handleChange}
+          disabled={loading}
         />
         {formData.cover_url && (
           <img
@@ -218,7 +260,8 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           name="am_link"
           id="am_link"
           value={formData.am_link}
-          onChange={handleChange}
+          onChange={autopopulateAlbumForm}
+          disabled={loading}
         />
         <input
           type="text"
@@ -228,6 +271,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           id="spotify_link"
           value={formData.spotify_link}
           onChange={handleChange}
+          disabled={loading}
         />
         <div className="flex justify-center">
           <button
@@ -235,7 +279,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
             className="btn btn-active btn-success"
             disabled={loading}
           >
-            Submit{' '}
+            Submit
             {loading && (
               <span className="loading loading-spinner text-success"></span>
             )}

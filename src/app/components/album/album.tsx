@@ -23,8 +23,8 @@ export default function Album({ data }: { data?: IAlbum }) {
               <Image
                 src="/apple_music.svg"
                 alt="Apple Music"
-                width={36}
-                height={36}
+                width={40}
+                height={40}
               />
             </a>
           </div>
@@ -35,7 +35,12 @@ export default function Album({ data }: { data?: IAlbum }) {
               rel="noopener noreferrer"
               className="hover:opacity-80"
             >
-              <Image src="/spotify.png" alt="Spotify" width={36} height={36} />
+              <Image
+                src="/spotify_music.svg"
+                alt="Spotify"
+                width={40}
+                height={40}
+              />
             </a>
           </div>
         </div>

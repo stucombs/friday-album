@@ -110,6 +110,11 @@ a {
   justify-self: baseline;
 }
 
+.plain-link:disabled {
+  color: var(--color-secondary);
+  cursor: not-allowed;
+}
+
 /* PAGE TITLE */
 .page-title {
   width: fit-content;

@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'i.scdn.co',
         pathname: '/image/**'
+      },
+      {
+        protocol: 'https',
+        hostname: '*.mzstatic.com',
+        pathname: '/image/**'
       }
     ]
   }
