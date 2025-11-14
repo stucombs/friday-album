@@ -1,7 +1,8 @@
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Tomorrow, Permanent_Marker } from 'next/font/google';
-import './styles/globals.css';
+import './styles/tailwind.css';
+import './styles/globals.scss';
 
 const tomorrow = Tomorrow({
   weight: '400',
