@@ -28,9 +28,10 @@ export default function AlbumModal({
       setLoading(false);
       setSuccess(true);
     } catch (err: any) {
-      const message = `An error occurred promoting album ${data.title}: ${err.message}`;
-      setError(message);
+      console.error(err.message);
+      const message = `An error occurred promoting album ${data.title}: ${err.detail}`;
       setLoading(false);
+      setError(message);
     }
   };
   return (
@@ -67,11 +68,15 @@ export default function AlbumModal({
           </div>
           {loading && <span className="loading loading-spinner"></span>}
           {success && (
-            <span className="success">
-              Successfully promoted album {data.title}
-            </span>
+            <div role="alert" className="alert alert-success">
+              <span>✅ Album promoted successfully</span>
+            </div>
           )}
-          {error && <span className="error">{error}</span>}
+          {error && (
+            <div role="alert" className="alert alert-error">
+              <span>❌ {error}</span>
+            </div>
+          )}
         </div>
       </dialog>
     </>

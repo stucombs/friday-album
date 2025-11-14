@@ -18,7 +18,7 @@ const intialState = {
 export default function AddAlbumForm({ data }: { data?: any }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [success, setSuccess] = useState(false);
   const [genres, setGenres] = useState<IGenre[]>([]);
   const [formData, setFormData] = useState(intialState);
   const [editGenres, setEditGenres] = useState(false);
@@ -41,7 +41,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
       setGenres(data);
       setLoading(false);
     } catch (err: any) {
-      setError(err.message);
+      setError(err.details);
       setLoading(false);
     }
   };
@@ -57,20 +57,22 @@ export default function AddAlbumForm({ data }: { data?: any }) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    e.stopPropagation();
+
     setLoading(true);
     setError('');
-    setSuccess('');
+    setSuccess(false);
 
     if (!validateMusicUrls()) return false;
 
     if (data) {
       try {
-        const response = await editAlbum(formData);
-        setSuccess('Album edited successfullly ✅');
+        await editAlbum(formData);
+        setSuccess(true);
         setLoading(false);
       } catch (err: any) {
         console.error(err.message);
-        setError('An error occurred editing album');
+        setError(err.details);
         setLoading(false);
       }
 
@@ -80,12 +82,12 @@ export default function AddAlbumForm({ data }: { data?: any }) {
     const response = await createAlbum(formData);
 
     if (response.error) {
-      setError(response.error);
+      setError(response.error.details);
       setLoading(false);
     }
 
     if (response.data) {
-      setSuccess('Album created successfully ✅');
+      setSuccess(true);
       setLoading(false);
       setFormData(intialState);
     }
@@ -123,41 +125,44 @@ export default function AddAlbumForm({ data }: { data?: any }) {
       ...prev,
       am_link: e.target.value
     }));
-    const res = await fetch(`/api/get-album`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        url: e.target.value
-      })
-    });
-    const { data } = await res.json();
-    if (!data) {
-      setError('Failed to retrieve album info. Please try again');
-      setLoading(false);
-      return;
-    }
+    try {
+      const res = await fetch(`/api/get-album`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          url: e.target.value
+        })
+      });
 
-    setFormData((prev) => ({
-      ...prev,
-      spotify_link: data.spotify_link,
-      cover_url: data.cover_url,
-      title: data.title,
-      artist: data.artist
-    }));
+      const { data } = await res.json();
+
+      setFormData((prev) => ({
+        ...prev,
+        spotify_link: data.spotify_link,
+        cover_url: data.cover_url,
+        title: data.title,
+        artist: data.artist
+      }));
+    } catch (err: any) {
+      console.error(err.message);
+      setError(err.message);
+    }
 
     setLoading(false);
   };
 
   return (
     <>
-      <EditGenres
-        isOpen={editGenres}
-        onClose={() => setEditGenres(false)}
-        genres={genres}
-        onChanged={() => loadGenres()}
-      ></EditGenres>
+      {genres && editGenres && (
+        <EditGenres
+          isOpen={editGenres}
+          onClose={() => setEditGenres(false)}
+          genres={genres}
+          onChanged={() => loadGenres()}
+        ></EditGenres>
+      )}
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 min-w-[32vw]"
@@ -186,7 +191,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
         />
         <div className="flex flex-row gap-4">
           <select
-            defaultValue="0"
+            value={formData.genre_id}
             className="select col-3/4"
             onChange={handleChange}
             id="genre_id"
@@ -285,14 +290,14 @@ export default function AddAlbumForm({ data }: { data?: any }) {
             )}
           </button>
         </div>
-        {error && (
-          <div className="flex justify-center">
-            <p className="error">{error}</p>
+        {success && (
+          <div role="alert" className="alert alert-success">
+            <span>✅ Album edited successfully</span>
           </div>
         )}
-        {success && (
-          <div className="flex justify-center">
-            <p className="success">{success}</p>
+        {error && (
+          <div role="alert" className="alert alert-error">
+            <span>❌ {error}</span>
           </div>
         )}
       </form>

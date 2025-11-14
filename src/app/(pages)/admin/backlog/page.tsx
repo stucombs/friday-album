@@ -8,7 +8,12 @@ import {
   AlbumLog,
   AlbumModal
 } from '@components';
-import { getAlbumBacklog, getRandomAlbum } from '@lib/services/albums.service';
+import {
+  getAlbumBacklog,
+  getRandomAlbum,
+  promoteAlbum,
+  deleteAlbum
+} from '@lib/services/albums.service';
 import Link from 'next/link';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
@@ -20,7 +25,10 @@ function BackLog() {
   const [page, setPage] = useState(1);
   const [meta, setMeta] = useState({ totalPages: 1 });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
   const [albumModal, setAlbumModal] = useState(false);
   const [randomAlbum, setRandomAlbum] = useState<IAlbum>();
 
@@ -39,7 +47,7 @@ function BackLog() {
     };
 
     loadAlbums();
-  }, [page]);
+  }, [page, refresh]);
 
   const nextPage = (): void => {
     if (page < meta.totalPages) {
@@ -61,6 +69,42 @@ function BackLog() {
     setLoading(false);
   };
 
+  const onPromoteAlbum = async (id: number, title: string): Promise<void> => {
+    setEditLoading(true);
+    setSuccess('');
+
+    try {
+      setError('');
+      await promoteAlbum(id);
+      setSuccess(`Successfully promoted album ${title}`);
+    } catch (err: any) {
+      console.error(err.message);
+      setError(err.message);
+    }
+    setEditLoading(false);
+  };
+
+  const onDeleteAlbum = async (id: number, title: string): Promise<void> => {
+    setEditLoading(true);
+    setSuccess('');
+
+    try {
+      setError('');
+      await deleteAlbum(id);
+      setSuccess(`Album ${title} removed successfully`);
+      setRefresh(!refresh);
+    } catch (err: any) {
+      console.error(err.message);
+      setError(`An error occurred removing album.`);
+    }
+    setEditLoading(false);
+  };
+
+  const onClearMessage = (): void => {
+    setSuccess('');
+    setError('');
+  };
+
   if (status === 'unauthenticated') return <NoAccess></NoAccess>;
 
   return (
@@ -77,12 +121,14 @@ function BackLog() {
         >
           Select a random album
         </button>
-        {randomAlbum && (
+        {albumModal && randomAlbum && (
           <AlbumModal
             isOpen={albumModal}
             data={randomAlbum}
             admin={true}
-            onClose={() => setAlbumModal(false)}
+            onClose={() => {
+              setAlbumModal(false);
+            }}
           ></AlbumModal>
         )}
         {loading && <Loader></Loader>}
@@ -90,7 +136,14 @@ function BackLog() {
         {!loading &&
           !error &&
           albums.map((album: IAlbum) => (
-            <AlbumLog data={album} key={album.id}></AlbumLog>
+            <AlbumLog
+              data={album}
+              key={album.id}
+              loading={editLoading}
+              toggleRefresh={() => setRefresh(!refresh)}
+              onPromoteAlbum={() => onPromoteAlbum(album.id, album.title)}
+              onDeleteAlbum={() => onDeleteAlbum(album.id, album.title)}
+            ></AlbumLog>
           ))}
         <div className="flex flex-row gap-4">
           {page > 1 && (
@@ -114,6 +167,22 @@ function BackLog() {
             </button>
           )}
         </div>
+        {error && (
+          <div role="alert" className="alert alert-error">
+            <span>❌ {error}</span>
+            <button className="btn btn-sm btn-ghost" onClick={onClearMessage}>
+              clear
+            </button>
+          </div>
+        )}
+        {success && (
+          <div role="alert" className="alert alert-success">
+            <span>✅ {success}</span>
+            <button className="btn btn-sm btn-ghost" onClick={onClearMessage}>
+              clear
+            </button>
+          </div>
+        )}
       </main>
       <Footer></Footer>
     </div>

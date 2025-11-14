@@ -24,7 +24,7 @@ export default function EditAlbum({
         <div className="modal-box" style={{ minWidth: '50vw' }}>
           <h3 className="font-bold text-lg">Edit Album {data.title}</h3>
           <br />
-          <AddAlbumForm data={data}></AddAlbumForm>
+          {isOpen && <AddAlbumForm data={data}></AddAlbumForm>}
           <div className="modal-action">
             <form method="dialog">
               <button className="btn btn-neutral" onClick={onClose}>

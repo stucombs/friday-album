@@ -25,14 +25,12 @@ export default function EditGenres({
     try {
       await deleteGenre(id);
       onChanged();
+      setSuccess('Genre removed');
       setLoading(false);
     } catch (err: any) {
-      console.error(err.code);
-      if (err.code === '23503') {
-        setError('Cannot delete genre linked to an existing album');
-      } else {
-        setError('Failed to delete genre');
-      }
+      setSuccess('');
+      console.error(err.messsage);
+      setError(err.details);
       setLoading(false);
     }
   };
@@ -45,16 +43,14 @@ export default function EditGenres({
       await createGenre({
         name: genreInput.toLowerCase()
       });
-      setSuccess('Genre added successfully');
       setGenreInput('');
       onChanged();
+      setSuccess('Genre added successfully');
       setLoading(false);
     } catch (err: any) {
-      if (err?.code === '23505') {
-        setError('Genre aleady exists');
-      } else {
-        setError('Failed to add genre');
-      }
+      console.error(err.message);
+      setError(err.details);
+      setSuccess('');
       setLoading(false);
     }
   };
@@ -63,7 +59,6 @@ export default function EditGenres({
     <>
       <input
         type="checkbox"
-        id="edit-genre-modal-checkbox"
         className="modal-toggle"
         checked={isOpen}
         onChange={onClose}
@@ -109,8 +104,18 @@ export default function EditGenres({
               Add
             </button>
           </div>
-          {error && <span className="error">{error}</span>}
-          {success && <span className="success">{success}</span>}
+          <div className="flex flex-col mt-3">
+            {error && (
+              <div role="alert" className="alert alert-error">
+                <span>❌ {error}</span>
+              </div>
+            )}
+            {success && (
+              <div role="alert" className="alert alert-success">
+                <span>✅ {success}</span>
+              </div>
+            )}
+          </div>
           <div className="modal-action">
             <form method="dialog">
               <button className="btn" onClick={onClose} disabled={loading}>
