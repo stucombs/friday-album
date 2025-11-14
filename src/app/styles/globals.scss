@@ -3,6 +3,7 @@
 
 html,
 body {
+  color-scheme: dark;
   font-family: var(--font-tomorrow);
   overflow-x: hidden;
   padding: 0;
@@ -54,18 +55,6 @@ a {
   .main {
     align-items: center;
     gap: 16px;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  .logo {
-    filter: invert(1);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
   }
 }
 
