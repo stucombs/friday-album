@@ -1,4 +1,4 @@
-import { PageTitle, Album, Cover, Footer } from '@components';
+import { PageTitle, Album, Cover, Footer, Holiday } from '@components';
 import { getActiveAlbum } from '@lib/services/albums.service';
 import { authOptions } from '@lib/services/auth.service';
 import Link from 'next/link';
@@ -12,6 +12,7 @@ export default async function Home() {
     <div className="page">
       <main className="main">
         <PageTitle></PageTitle>
+        {/* <Holiday></Holiday> */}
         <Cover data={activeAlbum?.cover_url}></Cover>
         <Album data={activeAlbum}></Album>
         <Link href="/about">WHY FRIDAY</Link>
