@@ -281,7 +281,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
         <div className="flex justify-center">
           <button
             type="submit"
-            className="btn btn-active btn-success"
+            className="btn btn-soft btn-success"
             disabled={loading}
           >
             Submit

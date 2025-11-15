@@ -19,7 +19,7 @@ import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 
-function BackLog() {
+function Backlog() {
   const { data: session, status } = useSession();
   const [albums, setAlbums] = useState<IAlbum[]>([]);
   const [page, setPage] = useState(1);
@@ -189,10 +189,10 @@ function BackLog() {
   );
 }
 
-export default function Backlog() {
+export default function AuthWrapper() {
   return (
     <SessionProvider>
-      <BackLog />
+      <Backlog />
     </SessionProvider>
   );
 }
