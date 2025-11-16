@@ -28,7 +28,7 @@ export default function EditAlbum({
           <div className="modal-action">
             <form method="dialog">
               <button className="btn btn-neutral" onClick={onClose}>
-                Close
+                CLOSE
               </button>
             </form>
           </div>

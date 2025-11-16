@@ -120,7 +120,7 @@ function Backlog() {
             onClick={onSelectRandomAlbum}
             disabled={loading}
           >
-            Select a random album
+            SELECT A RANDOM ALBUM
           </button>
           {albumModal && randomAlbum && (
             <AlbumModal
@@ -154,7 +154,7 @@ function Backlog() {
                 onClick={prevPage}
                 disabled={loading}
               >
-                &lt;&nbsp;Previous
+                &lt;&nbsp;PREVIOUS
               </button>
             )}
             {page < meta.totalPages && (
@@ -164,7 +164,7 @@ function Backlog() {
                 onClick={nextPage}
                 disabled={loading}
               >
-                Next&nbsp;&gt;
+                NEXT&nbsp;&gt;
               </button>
             )}
           </div>

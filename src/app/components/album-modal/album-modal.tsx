@@ -54,15 +54,15 @@ export default function AlbumModal({
             <form method="dialog" className="flex flex-row gap-4">
               {admin && (
                 <button
-                  className="btn btn-soft-success"
+                  className="btn btn-soft btn-success"
                   onClick={onPromoteAlbum}
                   disabled={success}
                 >
-                  Promote
+                  PROMOTE
                 </button>
               )}
               <button className="btn btn-neutral" onClick={onClose}>
-                Close
+                CLOSE
               </button>
             </form>
           </div>

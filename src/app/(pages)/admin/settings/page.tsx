@@ -126,7 +126,7 @@ function Settings() {
                 className="btn btn-soft btn-success"
                 disabled={loading}
               >
-                Save Settings{' '}
+                SAVE SETTINGS
                 {loading && (
                   <span className="loading loading-spinner text-success"></span>
                 )}

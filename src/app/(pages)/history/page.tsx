@@ -87,7 +87,7 @@ export default function History() {
           onClick={onSelectRandomAlbum}
           disabled={loading}
         >
-          Pick a Random Album
+          PICK A RANDOM ALBUM
         </button>
         {albums.map((album: IAlbum) => (
           <Album data={album} key={album.id}></Album>

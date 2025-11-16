@@ -283,7 +283,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
             className="btn btn-soft btn-success"
             disabled={loading}
           >
-            Submit
+            SUBMIT
             {loading && (
               <span className="loading loading-spinner text-success"></span>
             )}
