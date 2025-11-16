@@ -1,18 +1,20 @@
 import { PageTitle, Album, Cover, Footer, Holiday } from '@components';
-import { getActiveAlbum } from '@lib/services/albums.service';
-import { authOptions } from '@lib/services/auth.service';
+import { getSettings, getActiveAlbum, authOptions } from '@lib/services';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 
 export default async function Home() {
   const activeAlbum: IAlbum = await getActiveAlbum();
   const session = await getServerSession(authOptions);
+  const settings = await getSettings();
 
   return (
     <div className="page">
       <main className="main">
         <PageTitle></PageTitle>
-        {/* <Holiday></Holiday> */}
+        {settings?.value?.theme && (
+          <Holiday theme={settings?.value?.theme}></Holiday>
+        )}
         <Cover data={activeAlbum?.cover_url}></Cover>
         <Album data={activeAlbum}></Album>
         <Link href="/about">WHY FRIDAY</Link>
