@@ -42,7 +42,7 @@ export default function AlbumLog({
             <div>
               <button
                 type="button"
-                className="btn btn-sm btn-success"
+                className="btn btn-sm btn-soft btn-success"
                 onClick={() => onPromoteAlbum()}
                 disabled={!data || loading}
               >
@@ -52,7 +52,7 @@ export default function AlbumLog({
             <div>
               <button
                 type="button"
-                className="btn btn-sm btn-info"
+                className="btn btn-sm btn-soft btn-info"
                 onClick={() => setEditAlbum(true)}
                 disabled={!data || loading}
               >
@@ -62,7 +62,7 @@ export default function AlbumLog({
             <div>
               <button
                 type="button"
-                className="btn btn-sm btn-error"
+                className="btn btn-sm btn-soft btn-error"
                 onClick={() => onDeleteAlbum()}
                 disabled={!data || loading}
               >

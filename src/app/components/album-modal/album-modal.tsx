@@ -1,7 +1,7 @@
 'use client';
 
 import { Album, Cover } from '@components';
-import { promoteAlbum } from '@lib/services/albums.service';
+import { promoteAlbum } from '@lib/services';
 import { useState } from 'react';
 
 export default function AlbumModal({
@@ -54,7 +54,7 @@ export default function AlbumModal({
             <form method="dialog" className="flex flex-row gap-4">
               {admin && (
                 <button
-                  className="btn btn-success"
+                  className="btn btn-soft-success"
                   onClick={onPromoteAlbum}
                   disabled={success}
                 >

@@ -1,8 +1,7 @@
 'use client';
 
 import { EditGenres } from '@components/edit-genres';
-import { createAlbum, editAlbum } from '@lib/services/albums.service';
-import { getGenres } from '@lib/services/genre.service';
+import { createAlbum, editAlbum, getGenres } from '@lib/services';
 import { useEffect, useState } from 'react';
 
 const intialState = {
@@ -292,7 +291,11 @@ export default function AddAlbumForm({ data }: { data?: any }) {
         </div>
         {success && (
           <div role="alert" className="alert alert-success">
-            <span>✅ Album edited successfully</span>
+            {data ? (
+              <span>✅ Album edited successfully</span>
+            ) : (
+              <span>✅ Album added successfully</span>
+            )}
           </div>
         )}
         {error && (

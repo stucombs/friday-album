@@ -1,7 +1,7 @@
 'use client';
 
 import { Footer, Home, Album, Loader, AlbumModal } from '@components';
-import { getPastAlbums, getRandomAlbum } from '@lib/services/albums.service';
+import { getPastAlbums, getRandomAlbum } from '@lib/services';
 import { useEffect, useState } from 'react';
 
 export default function History() {

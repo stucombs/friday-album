@@ -13,7 +13,7 @@ import {
   getRandomAlbum,
   promoteAlbum,
   deleteAlbum
-} from '@lib/services/albums.service';
+} from '@lib/services';
 import Link from 'next/link';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
