@@ -36,7 +36,6 @@ function Settings() {
       try {
         const result = await getSettings();
         if (result) {
-          console.log(result);
           setFormData(result.value);
           setUpdatedAt(result.created_at);
         }
@@ -49,7 +48,7 @@ function Settings() {
     };
 
     loadSettings();
-  }, []);
+  }, [success]);
 
   const handleFormSubmit = async (
     e: React.FormEvent<HTMLFormElement>
@@ -58,15 +57,14 @@ function Settings() {
     e.stopPropagation();
 
     setLoading(true);
-    setSuccess(false);
-    setError(false);
 
     try {
       await setSettings(formData);
-      console.log(formData);
+      setError(false);
       setSuccess(true);
     } catch (err: any) {
       console.error(err.message);
+      setSuccess(false);
       setError(true);
     }
 

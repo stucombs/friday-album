@@ -1,5 +1,5 @@
 export default function Holiday({ theme }: { theme?: any }) {
-  console.log(`[Loading theme: ${theme}]`);
+  console.info(`[Loading theme: ${theme}]`);
 
   switch (theme) {
     case 'holiday':
