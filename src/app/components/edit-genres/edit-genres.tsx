@@ -65,7 +65,7 @@ export default function EditGenres({
       />
       <dialog id="edit-genre-modal" className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Edit Genres</h3>
+          <h3 className="font-bold text-lg">EDIT GENRES</h3>
           <br />
           {loading && <Loader></Loader>}
           <div className="flex flex-col gap-4">
@@ -97,11 +97,11 @@ export default function EditGenres({
             />
             <button
               type="button"
-              className="btn btn-sm btn-success"
+              className="btn btn-sm btn-soft btn-success"
               disabled={loading}
               onClick={submitGenre}
             >
-              Add
+              ADD
             </button>
           </div>
           <div className="flex flex-col mt-3">
@@ -119,7 +119,7 @@ export default function EditGenres({
           <div className="modal-action">
             <form method="dialog">
               <button className="btn" onClick={onClose} disabled={loading}>
-                Close
+                CLOSE
               </button>
             </form>
           </div>
