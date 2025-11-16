@@ -10,17 +10,19 @@ function AddAlbum() {
 
   if (status === 'unauthenticated') return <NoAccess></NoAccess>;
 
-  return (
-    <div className="page">
-      <main className="main">
-        <Home></Home>
-        <Link href="/admin">RETURN TO ADMIN</Link>
-        <h3>Add a new Album</h3>
-        <AddAlbumForm></AddAlbumForm>
-      </main>
-      <Footer></Footer>
-    </div>
-  );
+  if (status === 'authenticated') {
+    return (
+      <div className="page">
+        <main className="main">
+          <Home></Home>
+          <Link href="/admin">RETURN TO ADMIN</Link>
+          <h3>Add a new Album</h3>
+          <AddAlbumForm></AddAlbumForm>
+        </main>
+        <Footer></Footer>
+      </div>
+    );
+  }
 }
 
 export default function AuthWrapper() {

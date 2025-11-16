@@ -107,86 +107,88 @@ function Backlog() {
 
   if (status === 'unauthenticated') return <NoAccess></NoAccess>;
 
-  return (
-    <div className="page">
-      <main className="main">
-        <Home></Home>
-        <Link href="/admin">RETURN TO ADMIN</Link>
-        <h3>ALBUM BACKLOG</h3>
-        <button
-          type="button"
-          className="btn btn-success"
-          onClick={onSelectRandomAlbum}
-          disabled={loading}
-        >
-          Select a random album
-        </button>
-        {albumModal && randomAlbum && (
-          <AlbumModal
-            isOpen={albumModal}
-            data={randomAlbum}
-            admin={true}
-            onClose={() => {
-              setAlbumModal(false);
-            }}
-          ></AlbumModal>
-        )}
-        {loading && <Loader></Loader>}
-        {error && <p className="error">{error}</p>}
-        {!loading &&
-          !error &&
-          albums.map((album: IAlbum) => (
-            <AlbumLog
-              data={album}
-              key={album.id}
-              loading={editLoading}
-              toggleRefresh={() => setRefresh(!refresh)}
-              onPromoteAlbum={() => onPromoteAlbum(album.id, album.title)}
-              onDeleteAlbum={() => onDeleteAlbum(album.id, album.title)}
-            ></AlbumLog>
-          ))}
-        <div className="flex flex-row gap-4">
-          {page > 1 && (
-            <button
-              type="button"
-              className="btn btn-info"
-              onClick={prevPage}
-              disabled={loading}
-            >
-              &lt;&nbsp;Previous
-            </button>
+  if (status === 'authenticated') {
+    return (
+      <div className="page">
+        <main className="main">
+          <Home></Home>
+          <Link href="/admin">RETURN TO ADMIN</Link>
+          <h3>ALBUM BACKLOG</h3>
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={onSelectRandomAlbum}
+            disabled={loading}
+          >
+            Select a random album
+          </button>
+          {albumModal && randomAlbum && (
+            <AlbumModal
+              isOpen={albumModal}
+              data={randomAlbum}
+              admin={true}
+              onClose={() => {
+                setAlbumModal(false);
+              }}
+            ></AlbumModal>
           )}
-          {page < meta.totalPages && (
-            <button
-              type="button"
-              className="btn btn-info"
-              onClick={nextPage}
-              disabled={loading}
-            >
-              Next&nbsp;&gt;
-            </button>
+          {loading && <Loader></Loader>}
+          {error && <p className="error">{error}</p>}
+          {!loading &&
+            !error &&
+            albums.map((album: IAlbum) => (
+              <AlbumLog
+                data={album}
+                key={album.id}
+                loading={editLoading}
+                toggleRefresh={() => setRefresh(!refresh)}
+                onPromoteAlbum={() => onPromoteAlbum(album.id, album.title)}
+                onDeleteAlbum={() => onDeleteAlbum(album.id, album.title)}
+              ></AlbumLog>
+            ))}
+          <div className="flex flex-row gap-4">
+            {page > 1 && (
+              <button
+                type="button"
+                className="btn btn-info"
+                onClick={prevPage}
+                disabled={loading}
+              >
+                &lt;&nbsp;Previous
+              </button>
+            )}
+            {page < meta.totalPages && (
+              <button
+                type="button"
+                className="btn btn-info"
+                onClick={nextPage}
+                disabled={loading}
+              >
+                Next&nbsp;&gt;
+              </button>
+            )}
+          </div>
+          {error && (
+            <div role="alert" className="alert alert-error">
+              <span>❌ {error}</span>
+              <button className="btn btn-sm btn-ghost" onClick={onClearMessage}>
+                clear
+              </button>
+            </div>
           )}
-        </div>
-        {error && (
-          <div role="alert" className="alert alert-error">
-            <span>❌ {error}</span>
-            <button className="btn btn-sm btn-ghost" onClick={onClearMessage}>
-              clear
-            </button>
-          </div>
-        )}
-        {success && (
-          <div role="alert" className="alert alert-success">
-            <span>✅ {success}</span>
-            <button className="btn btn-sm btn-ghost" onClick={onClearMessage}>
-              clear
-            </button>
-          </div>
-        )}
-      </main>
-      <Footer></Footer>
-    </div>
-  );
+          {success && (
+            <div role="alert" className="alert alert-success">
+              <span>✅ {success}</span>
+              <button className="btn btn-sm btn-ghost" onClick={onClearMessage}>
+                clear
+              </button>
+            </div>
+          )}
+        </main>
+        <Footer></Footer>
+      </div>
+    );
+  }
 }
 
 export default function AuthWrapper() {
