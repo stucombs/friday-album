@@ -4,3 +4,11 @@ CREATE TABLE IF NOT EXISTS public.site_settings (
   value jsonb null,
   constraint site_settings_pkey primary key (id)
 ) TABLESPACE pg_default;
+
+alter table "public"."site_settings" enable row level security;
+  create policy "anon_users_all"
+  on "public"."site_settings"
+  as permissive
+  for all
+  to public
+using (true);
