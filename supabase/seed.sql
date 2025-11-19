@@ -1,2 +1,2 @@
-/i 'supabase/seeds/genres.sql'
-/i 'supabase/seeds/albums.sql'
+-- /i 'supabase/seeds/genres.sql'
+-- /i 'supabase/seeds/albums.sql'
