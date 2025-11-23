@@ -116,14 +116,10 @@ export default function AddAlbumForm({ data }: { data?: any }) {
     return true;
   };
 
-  const autopopulateAlbumForm = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): Promise<void> => {
+  const autopopulateAlbumForm = async (e: any): Promise<void> => {
+    e.preventDefault();
+
     setLoading(true);
-    setFormData((prev) => ({
-      ...prev,
-      am_link: e.target.value
-    }));
     try {
       const res = await fetch(`/api/get-album`, {
         method: 'POST',
@@ -131,7 +127,7 @@ export default function AddAlbumForm({ data }: { data?: any }) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          url: e.target.value
+          url: formData.am_link
         })
       });
 
@@ -257,16 +253,25 @@ export default function AddAlbumForm({ data }: { data?: any }) {
             }}
           />
         )}
-        <input
-          type="text"
-          className="input input-md w-full"
-          placeholder="Apple Music Link"
-          name="am_link"
-          id="am_link"
-          value={formData.am_link}
-          onChange={autopopulateAlbumForm}
-          disabled={loading}
-        />
+        <div className="flex flex-row gap-2 items-center">
+          <input
+            type="text"
+            className="input input-md w-full"
+            placeholder="Apple Music Link"
+            name="am_link"
+            id="am_link"
+            value={formData.am_link}
+            onChange={handleChange}
+            disabled={loading}
+          />
+          <button
+            className="btn btn-xs btn-info"
+            onClick={autopopulateAlbumForm}
+            disabled={loading || !formData.am_link}
+          >
+            search
+          </button>
+        </div>
         <input
           type="text"
           className="input input-md w-full"
