@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { PageTitle, Album, Cover, Footer, Holiday } from '@components';
 import { getSettings, getActiveAlbum, authOptions } from '@lib/services';
 import Link from 'next/link';
