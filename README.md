@@ -8,6 +8,10 @@ First, run the development server with `yarn dev`. Open http://localhost:3000 wi
 
 Start local supabase with `yarn supabase start`. See local Supabase dashboard at http://127.0.0.1:54323/project/default
 
+## Migrations
+
+`yarn supabase migration up --include-all`
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
