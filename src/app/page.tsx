@@ -20,6 +20,8 @@ export default async function Home() {
         <Cover data={activeAlbum?.cover_url}></Cover>
         <Album data={activeAlbum}></Album>
         <Link href="/about">WHY FRIDAY</Link>
+        <Link href="/history">PAST ALBUMS</Link>
+        <Link href="/subscribe">NOTIFY ME</Link>
         <Link
           href="https://discord.gg/mW26JsW3SK"
           target="_blank"
@@ -28,7 +30,6 @@ export default async function Home() {
         >
           JOIN THE DISCUSSION
         </Link>
-        <Link href="/history">PAST ALBUMS</Link>
         {session && <Link href="/admin">ADMIN</Link>}
       </main>
       <Footer></Footer>
