@@ -1,7 +1,6 @@
 'use client';
 
 import { Footer, Home } from '@components';
-import { createSubscription } from '@lib/services';
 import { useState } from 'react';
 
 export default function Subscribe() {
@@ -21,18 +20,17 @@ export default function Subscribe() {
     setSuccess(false);
 
     try {
-      const response = await createSubscription(email);
-      console.log(response);
+      const response = await fetch('api/subscriptions/add-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
 
-      if (response.error) {
+      const data = await response.json();
+
+      if (!response.ok) {
         setLoading(false);
-        switch (response.error.code) {
-          case '23505':
-            setError('Email already exists. Please try another email.');
-            break;
-          default:
-            setError(response.error.message);
-        }
+        setError(data.error);
       } else {
         setLoading(false);
         setSuccess(true);

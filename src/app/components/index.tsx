@@ -11,3 +11,4 @@ export * from './edit-genres';
 export * from './edit-album';
 export * from './album-modal';
 export * from './holiday';
+export * from './email-template';
