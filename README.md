@@ -4,13 +4,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 Install project dependencies with `yarn`
 
-First, run the development server with `yarn dev`. Open http://localhost:3000 with your browser to see the result.
+Start local Supabase instance with `yarn supabase start`. See local Supabase dashboard at http://127.0.0.1:54323/project/default
 
-Start local supabase with `yarn supabase start`. See local Supabase dashboard at http://127.0.0.1:54323/project/default
+Run the development server with `yarn dev`. Open http://localhost:3000 with your browser to see the result.
 
 ## Migrations
 
-`yarn supabase migration up --include-all`
+`yarn migrate:dev` to run migrations in local Supabase instance
 
 ## Learn More
 

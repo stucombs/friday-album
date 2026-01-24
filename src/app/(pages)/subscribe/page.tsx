@@ -48,25 +48,24 @@ export default function Subscribe() {
     <div className="page">
       <main className="main">
         <Home></Home>
-        <div>Get notified when a new album is selected!</div>
+        <h3>SUBSCRIBE</h3>
+        <small>Get notified when a new album is picked!</small>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-6 min-w-[32vw]"
+          className="flex flex-col gap-4 min-w-[32vw]"
         >
+          <input
+            type="email"
+            placeholder="you@domain.com"
+            className="input input-md w-full"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={loading}
+          />
           <div className="flex justify-center gap-4">
-            <input
-              type="email"
-              placeholder="you@domain.com"
-              className="input input-md w-full"
-              id="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </div>
-          <div className="flex justify-center gap-2">
             <div>
               <button
                 type="submit"
