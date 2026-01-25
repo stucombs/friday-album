@@ -1,5 +1,5 @@
 import { Home, Footer, NoAccess } from '@components';
-import { authOptions } from '@lib/services';
+import { authOptions } from '@lib/services/auth.service';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 

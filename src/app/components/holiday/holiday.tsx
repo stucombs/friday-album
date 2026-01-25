@@ -1,4 +1,4 @@
-export default function Holiday({ theme }: { theme?: any }) {
+export function Holiday({ theme }: { theme?: any }) {
   console.info(`[Loading theme: ${theme}]`);
 
   switch (theme) {

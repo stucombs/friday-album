@@ -1,7 +1,8 @@
 'use client';
 
 import { EditGenres } from '@components/edit-genres';
-import { createAlbum, editAlbum, getGenres } from '@lib/services';
+import { createAlbum, editAlbum } from '@lib/services/albums.service';
+import { getGenres } from '@lib/services/genre.service';
 import { useEffect, useState } from 'react';
 
 const intialState = {
@@ -14,7 +15,7 @@ const intialState = {
   cover_url: ''
 };
 
-export default function AddAlbumForm({ data }: { data?: any }) {
+export function AddAlbumForm({ data }: { data?: any }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);

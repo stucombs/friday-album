@@ -10,8 +10,6 @@
     "format": "prettier --write .",
     "supabase": "supabase",
     "migrate:dev": "supabase db push --local",
-    "migrate:preview": "dotenv -e .env.preview supabase db push --db-url \"postgresql://$SUPABASE_DB_USER:$SUPABASE_DB_PASSWORD@$SUPABASE_DB_HOST:$SUPABASE_DB_PORT/postgres\"",
-    "migrate:prod": "dotenv -e .env.prod supabase db push --db-url \"postgresql://$SUPABASE_DB_USER:$SUPABASE_DB_PASSWORD@$SUPABASE_DB_HOST:$SUPABASE_DB_PORT/postgres\"",
     "db:pull": "dotenv -e .env.prod supabase db pull --db-url \"postgresql://$SUPABASE_DB_USER:$SUPABASE_DB_PASSWORD@$SUPABASE_DB_HOST:$SUPABASE_DB_PORT/postgres\""
   },
   "simple-git-hooks": {

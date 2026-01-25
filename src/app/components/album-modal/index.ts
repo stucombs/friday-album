@@ -1,1 +1,1 @@
-export { default as AlbumModal } from './album-modal';
+export * from './album-modal';

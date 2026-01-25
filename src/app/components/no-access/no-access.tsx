@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 
 import { Home } from '../home';
 
-export default function NoAccess() {
+export function NoAccess() {
   const router = useRouter();
 
   return (

@@ -3,7 +3,7 @@
 import { EditAlbum } from '@components/edit-album';
 import { useState } from 'react';
 
-export default function AlbumLog({
+export function AlbumLog({
   data,
   loading,
   toggleRefresh,

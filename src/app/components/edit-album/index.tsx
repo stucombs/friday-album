@@ -1,1 +1,1 @@
-export { default as EditAlbum } from './edit-album';
+export * from './edit-album';

@@ -2,7 +2,7 @@
 
 import { AddAlbumForm } from '@components/album-form';
 
-export default function EditAlbum({
+export function EditAlbum({
   isOpen,
   data,
   onClose

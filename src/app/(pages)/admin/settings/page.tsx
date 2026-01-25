@@ -1,7 +1,7 @@
 'use client';
 
 import { Footer, Home, NoAccess } from '@app/components';
-import { getSettings, setSettings } from '@lib/services';
+import { getSettings, setSettings } from '@lib/services/settings.service';
 import Link from 'next/link';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';

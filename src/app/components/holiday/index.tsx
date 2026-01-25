@@ -1,1 +1,1 @@
-export { default as Holiday } from './holiday';
+export * from './holiday';

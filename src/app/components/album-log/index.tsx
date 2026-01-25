@@ -1,1 +1,1 @@
-export { default as AlbumLog } from './album-log';
+export * from './album-log';

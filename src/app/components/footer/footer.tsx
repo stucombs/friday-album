@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className="page-footer">
       <p>

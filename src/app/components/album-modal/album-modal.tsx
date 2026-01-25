@@ -1,10 +1,10 @@
 'use client';
 
 import { Album, Cover } from '@components';
-import { promoteAlbum } from '@lib/services';
+import { promoteAlbum } from '@lib/services/albums.service';
 import { useState } from 'react';
 
-export default function AlbumModal({
+export function AlbumModal({
   isOpen,
   data,
   admin,

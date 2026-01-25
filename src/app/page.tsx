@@ -1,7 +1,9 @@
 export const dynamic = 'force-dynamic';
 
 import { PageTitle, Album, Cover, Footer, Holiday } from '@components';
-import { getSettings, getActiveAlbum, authOptions } from '@lib/services';
+import { getActiveAlbum } from '@lib/services/albums.service';
+import { authOptions } from '@lib/services/auth.service';
+import { getSettings } from '@lib/services/settings.service';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 

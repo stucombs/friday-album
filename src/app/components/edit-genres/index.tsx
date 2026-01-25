@@ -1,1 +1,1 @@
-export { default as EditGenres } from './edit-genres';
+export * from './edit-genres';

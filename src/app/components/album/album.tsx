@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-export default function Album({ data }: { data?: IAlbum }) {
+export function Album({ data }: { data?: IAlbum }) {
   if (!data) return <p>No album active, check back later!</p>;
 
   return (
