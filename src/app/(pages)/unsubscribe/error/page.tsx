@@ -1,10 +1,13 @@
-export default function UnsubscribeError({
-  searchParams
-}: {
-  searchParams: { reason?: string };
-}) {
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+
+export default function UnsubscribeError() {
+  const searchParams = useSearchParams();
+  const reason = searchParams.get('reason');
   let message: string;
-  switch (searchParams.reason) {
+
+  switch (reason) {
     case 'invalid_token':
       message = 'Link or token has expired.';
       break;

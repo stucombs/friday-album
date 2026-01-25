@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Tomorrow, Permanent_Marker } from 'next/font/google';
 import './styles/tailwind.css';
 import './styles/globals.scss';
+import { Suspense } from 'react';
 
 const tomorrow = Tomorrow({
   weight: '400',
@@ -29,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${marker.variable} ${tomorrow.variable}`}>
       <body>
-        {children}
+        <Suspense>{children}</Suspense>
         <Analytics />
       </body>
     </html>
