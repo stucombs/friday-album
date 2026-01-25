@@ -31,7 +31,9 @@ export function EmailTemplate({ unsub_token }: EmailTemplateProps) {
       </p>
       <div style={{ fontSize: '12px', marginTop: '45px' }}>
         You are recieving this because you subscribed to weekly album drops.{' '}
-        <a href={`https://fridayalbum.com/unsubscribe?token=${unsub_token}`}>
+        <a
+          href={`https://fridayalbum.com/api/unsubscribe?token=${unsub_token}`}
+        >
           Unsubscribe
         </a>{' '}
         at any time.

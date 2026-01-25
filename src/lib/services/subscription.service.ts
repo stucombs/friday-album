@@ -17,12 +17,13 @@ export const addEmail = async (email: string): Promise<any> => {
 };
 
 export const unsubscribe = async (token: string): Promise<any> => {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from('subscriptions')
     .update({
-      active: false
+      is_active: false
     })
-    .eq('unsub_token', token);
+    .eq('unsub_token', token)
+    .select();
 
   if (error) throw error;
 
