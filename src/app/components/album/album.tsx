@@ -10,8 +10,11 @@ export function Album({ data }: { data?: IAlbum }) {
       <div className="p-3 gap-2 flex flex-col items-center">
         <p className="card-title">{data?.title}</p>
         <p className="italic">{data?.artist}</p>
-        <p>Released: {data?.release_year}</p>
-        <p className="capitalize">Genre: {data?.genre.name}</p>
+        <p>
+          <span className="capitalize">{data?.genre.name}</span> |{' '}
+          {data?.release_year}
+        </p>
+        {/* <p className="capitalize">{data?.genre.name}</p> */}
         <div className="flex flex-row justify-center gap-4">
           <div className="hover: cursor-pointer">
             <a

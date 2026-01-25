@@ -35,8 +35,10 @@ export function AlbumLog({
           <div className="flex flex-col gap-2">
             <p className="card-title">{data?.title}</p>
             <p className="italic">{data?.artist}</p>
-            <p>Released: {data?.release_year}</p>
-            <p className="capitalize">Genre: {data?.genre.name}</p>
+            <p>
+              <span className="capitalize">{data?.genre.name}</span> |{' '}
+              {data?.release_year}
+            </p>
           </div>
           <div className="flex flex-col items-end gap-2">
             <div>
