@@ -23,7 +23,10 @@ export default async function Home() {
         <Album data={activeAlbum}></Album>
         <Link href="/about">WHY FRIDAY</Link>
         <Link href="/history">PAST ALBUMS</Link>
-        <Link href="/subscribe">SUBSCRIBE</Link>
+        <div className="indicator">
+          <span className="indicator-item badge badge-secondary">New!</span>
+          <Link href="/subscribe">SUBSCRIBE</Link>
+        </div>
         <Link
           href="https://discord.gg/mW26JsW3SK"
           target="_blank"
