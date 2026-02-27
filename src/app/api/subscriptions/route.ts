@@ -9,29 +9,26 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(): Promise<NextResponse> {
   try {
-    let count = 0;
-    const users = await getSubscriptions();
+    const subscribers = await getSubscriptions();
 
-    for (const user of users) {
-      try {
-        const { data, error } = await resend.emails.send({
-          from: 'Friday Album <hello@fridayalbum.com>',
-          to: [user.email],
-          subject: "💿 It's Friday. A new album is waiting.",
-          react: EmailTemplate({
-            unsub_token: user.unsub_token
-          })
-        });
+    const subs = subscribers.map((sub: any) => ({
+      from: 'Friday Album <hello@fridayalbum.com>',
+      to: [sub.email],
+      subject: "💿 It's Friday! A new album is waiting.",
+      react: EmailTemplate({
+        unsub_token: sub.unsub_token
+      })
+    }));
 
-        if (error) throw error;
-        if (!error) count += 1;
-      } catch (err: any) {
-        console.error(`Failed to send email ${user.email}`);
-      }
+    const { data, error } = await resend.batch.send(subs);
+
+    if (error || data.data.length === 0) {
+      console.error(`Failed to send emails: ${error}`);
+      throw error;
     }
 
     return NextResponse.json({
-      message: `${count} notification(s) sent successfully`
+      message: `${data.data.length} notification(s) sent successfully`
     });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
