@@ -14,7 +14,7 @@ export default async function Admin() {
         <Home></Home>
         <h3>🔒 Admin Pages 🔒</h3>
         <Link href="/admin/add-album">ADD ALBUM</Link>
-        <Link href="/admin/backlog">VIEW BACKLOG</Link>
+        <Link href="/admin/queue">VIEW QUEUE</Link>
         <Link href="/admin/settings">SETTINGS</Link>
         <Link href="/api/auth/signout">SIGNOUT</Link>
       </main>
