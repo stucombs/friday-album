@@ -62,7 +62,19 @@ function Queue() {
   const onMoveDown = (index: number): void => {
     if (index === queue.length - 1) return;
     setIsDirty(true);
-    console.log('[DOWN] ', index);
+
+    const newQueue = [...queue];
+    const temp = {
+      ...newQueue[index + 1],
+      position: index + 1
+    };
+    newQueue[index + 1] = {
+      ...newQueue[index],
+      position: index + 2
+    };
+    newQueue[index] = temp;
+
+    setQueue(newQueue);
   };
 
   const onAddToQueue = (album: IAlbum): void => {
@@ -93,10 +105,11 @@ function Queue() {
       });
       await saveQueue(newQueue);
       setLoading(false);
+      setIsDirty(false);
     } catch(err: any) {
       console.error('[QUEUE] ', err);
       setError('An error occurred saving queue');
-    } 
+    }
   };
 
   const onClear = (): void => {
@@ -108,7 +121,7 @@ function Queue() {
     const newQueue = queue.filter(album => album.album_id !== item.album_id);
     setAlbums(prev => [...prev, item.albums]);
     
-    // reorder queue
+    // reorder queue after removing item
     const tempItems = newQueue.map((album: any, idx: number) => {
       return {...album, position: idx + 1};
     });
@@ -129,8 +142,6 @@ function Queue() {
 
   const onEditAlbum = (album: IAlbum): void => {
     // TODO: Add edit album logic
-    // setSelectedAlbum(album);
-    // setEditAlbum(true);
   };
 
   if (status === 'unauthenticated') return <NoAccess></NoAccess>;

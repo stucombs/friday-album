@@ -14,6 +14,14 @@ export const getQueue = async (): Promise<any> => {
 };
 
 export const saveQueue = async (queue: any[]): Promise<any> => {
+  // wipe the queue table before saving the new queue to avoid unique indexes
+  const { data: deleteData, error: deleteError } = await supabaseAdmin
+    .from('queue')
+    .delete()
+    .neq('album_id', 0);
+
+  if (deleteError) throw deleteError;
+
   const { data, error } = await supabaseAdmin
     .from('queue')
     .upsert(queue, { onConflict: 'album_id' })
