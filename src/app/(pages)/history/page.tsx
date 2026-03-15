@@ -96,7 +96,6 @@ export default function History() {
           <AlbumModal
             isOpen={albumModal}
             data={randomAlbum}
-            admin={false}
             onClose={() => setAlbumModal(false)}
           ></AlbumModal>
         )}
