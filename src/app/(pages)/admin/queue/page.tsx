@@ -1,8 +1,7 @@
 'use client';
 
 import { Home, Loader, NoAccess } from '@app/components';
-import { deleteAlbum, getAlbumBacklog } from '@lib/services/albums.service';
-import { getQueue, saveQueue } from '@lib/services/queue.service';
+import { deleteAlbum } from '@lib/services/albums.service';
 import { ChevronDown, ChevronUp, CircleMinus, Pencil, Plus, Trash } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,17 +16,31 @@ function Queue() {
   const [loading, setLoading] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
   const [clear, setClear] = useState(false);
-  const [editAlbum, setEditAlbum] = useState(false);
-  const [selectedAlbum, setSelectedAlbum] = useState<IAlbum>();
+  // const [editAlbum, setEditAlbum] = useState(false);
+  // const [selectedAlbum, setSelectedAlbum] = useState<IAlbum>();
 
   useEffect(() => {
     const loadAll = async () => {
       setLoading(true);
       try {
-        const queueData = await getQueue();
-        const albumData  = await getAlbumBacklog();
+        let res = await fetch(`/api/queue`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'applications/json'
+          }
+        });
+        const { data: queueData } = await res.json();
 
-        const filteredAlbums = albumData.filter(album => !queueData.some((q: any) => q.album_id === album.id));
+        res = await fetch(`/api/albums/backlog`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'applications/json'
+          }
+        });
+
+        const { data: albumData } = await res.json();
+
+        const filteredAlbums = albumData?.filter((album: IAlbum) => !queueData.some((q: any) => q.album_id === album.id));
         setQueue(queueData);
         setAlbums(filteredAlbums);
         setLoading(false);
@@ -95,18 +108,32 @@ function Queue() {
   };
 
   const onSaveQueue = async (): Promise<any> => {
-    setLoading(true);
+    setLoading(true)
     try {
-      const newQueue = queue.map(item => {
+      const saveQueue = queue.map(item => {
         return {
           album_id: item.album_id,
           position: item.position
         }
       });
-      await saveQueue(newQueue);
+
+      const result = await fetch(`/api/queue`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ queue: saveQueue })
+      });
+
+      const { success, message, data } = await result.json();
+
+      if (success) {
+        console.log(`${message}}`);
+        setLoading(false);
+        setIsDirty(false);
+      }
+    } catch (err: any) {
       setLoading(false);
-      setIsDirty(false);
-    } catch(err: any) {
       console.error('[QUEUE] ', err);
       setError('An error occurred saving queue');
     }
@@ -132,7 +159,17 @@ function Queue() {
 
   const onDeleteAlbum = async (id: number, title: string): Promise<void> => {
     try {
-      await deleteAlbum(id);
+      const res = await fetch(`/api/albums/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'applications/json'
+        }
+      });
+      
+      if (!res.ok) {
+        const error = await res.json();
+        throw error;
+      }
       setAlbums(prev => prev.filter(album => album.id !== id));
     } catch(err: any) {
       console.error('[QUEUE] ', err);

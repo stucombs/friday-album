@@ -71,7 +71,7 @@ export function AddAlbumForm({ data }: { data?: any }) {
         setSuccess(true);
         setLoading(false);
       } catch (err: any) {
-        console.error(err.message);
+        console.error('[EDIT ALBUM] ', err);
         setError(err.details);
         setLoading(false);
       }
@@ -122,7 +122,7 @@ export function AddAlbumForm({ data }: { data?: any }) {
 
     setLoading(true);
     try {
-      const res = await fetch(`/api/get-album`, {
+      const res = await fetch(`/api/get-album-info`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -142,7 +142,7 @@ export function AddAlbumForm({ data }: { data?: any }) {
         artist: data.artist
       }));
     } catch (err: any) {
-      console.error(err.message);
+      console.error('[ALBUM FORM] ', err);
       setError(err.message);
     }
 

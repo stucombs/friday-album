@@ -1,6 +1,6 @@
-import { createClient } from '@lib/supabase';
+import { createAdminClient } from '@lib/supabase';
 
-const supabaseAdmin = createClient();
+const supabaseAdmin = createAdminClient();
 
 export const getQueue = async (): Promise<any> => {
   const { data, error } = await supabaseAdmin
@@ -28,6 +28,20 @@ export const saveQueue = async (queue: any[]): Promise<any> => {
     .select();
 
   if (error) throw error;
+
+  return data;
+};
+
+export const getTopQueue = async (): Promise<any> => {
+  const { data, error } = await supabaseAdmin
+    .from('queue')
+    .select('*, albums ( * )')
+    .eq('position', 1)
+    .maybeSingle();
+
+  if (error) throw error;
+
+  console.log(data);
 
   return data;
 };
