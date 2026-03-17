@@ -1,7 +1,7 @@
 'use client';
 
 import { Home, Loader, NoAccess } from '@app/components';
-import { deleteAlbum } from '@lib/services/albums.service';
+import axios from 'axios';
 import { ChevronDown, ChevronUp, CircleMinus, Pencil, Plus, Trash } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,30 +23,16 @@ function Queue() {
     const loadAll = async () => {
       setLoading(true);
       try {
-        let res = await fetch(`/api/queue`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'applications/json'
-          }
-        });
-        const { data: queueData } = await res.json();
+        const { data: albumData } = await axios.get('/api/albums/backlog');
+        const { data: queueData } = await axios.get('/api/queue');
 
-        res = await fetch(`/api/albums/backlog`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'applications/json'
-          }
-        });
-
-        const { data: albumData } = await res.json();
-
-        const filteredAlbums = albumData?.filter((album: IAlbum) => !queueData.some((q: any) => q.album_id === album.id));
-        setQueue(queueData);
+        const filteredAlbums = albumData.albums.filter((album: IAlbum) => !queueData.queue.some((q: any) => q.album_id === album.id));
         setAlbums(filteredAlbums);
-        setLoading(false);
+        setQueue(queueData.queue);
       } catch (err: any) {
-        console.error('[QUEUE] ', err);
-        setError('An error occurred loading queue');
+        console.error(err);
+        setError(err.message);
+      } finally {
         setLoading(false);
       }
     };
@@ -117,25 +103,16 @@ function Queue() {
         }
       });
 
-      const result = await fetch(`/api/queue`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ queue: saveQueue })
-      });
+      const { data } = await axios.post('/api/queue', { queue: saveQueue });
 
-      const { success, message, data } = await result.json();
-
-      if (success) {
-        console.log(`${message}}`);
-        setLoading(false);
+      if (data.success) {
         setIsDirty(false);
       }
     } catch (err: any) {
-      setLoading(false);
       console.error('[QUEUE] ', err);
       setError('An error occurred saving queue');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -159,17 +136,8 @@ function Queue() {
 
   const onDeleteAlbum = async (id: number, title: string): Promise<void> => {
     try {
-      const res = await fetch(`/api/albums/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'applications/json'
-        }
-      });
-      
-      if (!res.ok) {
-        const error = await res.json();
-        throw error;
-      }
+      const { data } = await axios.delete(`/api/albums/${id}`);
+      console.warn(data.message);
       setAlbums(prev => prev.filter(album => album.id !== id));
     } catch(err: any) {
       console.error('[QUEUE] ', err);

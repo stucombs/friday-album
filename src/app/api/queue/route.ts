@@ -12,10 +12,7 @@ export async function GET(): Promise<NextResponse> {
       );
     }
 
-    return NextResponse.json({
-      success: true,
-      data
-    });
+    return NextResponse.json({ queue: data });
   } catch (err: any) {
     return NextResponse.json(
       { error: err.details || 'Unknown error' },

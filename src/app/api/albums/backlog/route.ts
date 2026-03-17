@@ -12,10 +12,7 @@ export async function GET(): Promise<NextResponse> {
       );
     }
 
-    return NextResponse.json({
-      success: true,
-      data
-    });
+    return NextResponse.json({ albums: data });
   } catch (err: any) {
     return NextResponse.json(
       { error: err.message ?? 'Unknown error loading backlog' },
