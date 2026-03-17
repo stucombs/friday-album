@@ -1,9 +1,9 @@
-import { createClient } from '@lib/supabase';
+import { createAdminClient } from '@lib/supabase';
 
-const supabase = createClient();
+const supabaseAdmin = createAdminClient();
 
 export const getSettings = async (): Promise<any> => {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from('site_settings')
     .select('*')
     .order('created_at', { ascending: false })
@@ -16,7 +16,7 @@ export const getSettings = async (): Promise<any> => {
 };
 
 export const setSettings = async (payload: any): Promise<any> => {
-  const { data, error } = await supabase.from('site_settings').insert({
+  const { data, error } = await supabaseAdmin.from('site_settings').insert({
     value: payload
   });
 

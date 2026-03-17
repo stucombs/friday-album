@@ -1,7 +1,7 @@
 'use client';
 
 import { Footer, Home, NoAccess } from '@app/components';
-import { getSettings, setSettings } from '@lib/services/settings.service';
+import axios from 'axios';
 import Link from 'next/link';
 import { SessionProvider } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
@@ -34,41 +34,39 @@ function Settings() {
     const loadSettings = async () => {
       setLoading(true);
       try {
-        const result = await getSettings();
-        if (result) {
-          setFormData(result.value);
-          setUpdatedAt(result.created_at);
+        const { data } = await axios.get('/api/settings');
+        if (data) {
+          setFormData(data.value);
+          setUpdatedAt(data.created_at);
         }
-      } catch (err: any) {
-        console.error(err.message);
+      } catch (err) {
+        console.error(err);
         setError(true);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     };
 
     loadSettings();
   }, [success]);
 
   const handleFormSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
+    e: React.SubmitEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     e.stopPropagation();
 
     setLoading(true);
-
     try {
-      await setSettings(formData);
+      await axios.post('/api/settings', formData);
       setError(false);
       setSuccess(true);
-    } catch (err: any) {
-      console.error(err.message);
-      setSuccess(false);
+    } catch (err) {
+      console.error(err);
       setError(true);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   const handleChange = (
