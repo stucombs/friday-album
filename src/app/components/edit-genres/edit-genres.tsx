@@ -1,7 +1,7 @@
 'use client';
 
 import { Loader } from '@components';
-import { createGenre, deleteGenre } from '@lib/services/genre.service';
+import axios from 'axios';
 import { useState } from 'react';
 
 export function EditGenres({
@@ -21,16 +21,17 @@ export function EditGenres({
   const [genreInput, setGenreInput] = useState('');
 
   const removeGenre = async (id: number): Promise<void> => {
+    setError('');
     setLoading(true);
     try {
-      await deleteGenre(id);
+      await axios.delete(`/api/albums/genre/${id}`);
       onChanged();
       setSuccess('Genre removed');
-      setLoading(false);
     } catch (err: any) {
       setSuccess('');
       console.error(err.messsage);
       setError(err.details);
+    } finally {
       setLoading(false);
     }
   };
@@ -40,17 +41,17 @@ export function EditGenres({
     setSuccess('');
     setLoading(true);
     try {
-      await createGenre({
+      const { data } = await axios.post('/api/albums/genre', {
         name: genreInput.toLowerCase()
       });
       setGenreInput('');
       onChanged();
       setSuccess('Genre added successfully');
-      setLoading(false);
     } catch (err: any) {
       console.error(err.message);
       setError(err.details);
       setSuccess('');
+    } finally {
       setLoading(false);
     }
   };

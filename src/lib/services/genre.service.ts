@@ -1,9 +1,9 @@
-import { createClient } from '@lib/supabase';
+import { createAdminClient } from '@lib/supabase';
 
-const supabase = createClient();
+const supabaseAdmin = createAdminClient();
 
 export const getGenres = async (): Promise<IGenre[]> => {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from('genre')
     .select('id, name')
     .order('name', { ascending: true });
@@ -13,20 +13,8 @@ export const getGenres = async (): Promise<IGenre[]> => {
   return data;
 };
 
-export const getGenreById = async (id: number): Promise<IGenre> => {
-  const { data, error } = await supabase
-    .from('genre')
-    .select()
-    .eq('id', id)
-    .maybeSingle();
-
-  if (error) throw error;
-
-  return data;
-};
-
 export const createGenre = async (payload: any) => {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from('genre')
     .insert([
       {
@@ -41,7 +29,10 @@ export const createGenre = async (payload: any) => {
 };
 
 export const deleteGenre = async (id: number) => {
-  const { data, error } = await supabase.from('genre').delete().eq('id', id);
+  const { data, error } = await supabaseAdmin
+    .from('genre')
+    .delete()
+    .eq('id', id);
 
   if (error) throw error;
 
