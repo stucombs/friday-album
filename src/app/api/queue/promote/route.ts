@@ -8,6 +8,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   try {
     const queue = await getQueue();
+
+    if (!queue.length) {
+      return NextResponse.json(
+        { error: `Failed to promote album. No albums in queue` },
+        { status: 500 }
+      );
+    }
+
     const { albums: nextAlbum } = queue.shift();
 
     const newQueue = queue.map((album: any) => {
