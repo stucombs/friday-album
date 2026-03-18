@@ -2,6 +2,7 @@
 
 import { Footer, Home, Album, Loader, AlbumModal } from '@components';
 import { getPastAlbums, getRandomAlbum } from '@lib/services/albums.service';
+import { ArrowBigLeft, ArrowBigRight, Shuffle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function History() {
@@ -87,7 +88,7 @@ export default function History() {
           onClick={onSelectRandomAlbum}
           disabled={loading}
         >
-          PICK A RANDOM ALBUM
+          PICK A RANDOM ALBUM <Shuffle />
         </button>
         {albums.map((album: IAlbum) => (
           <Album data={album} key={album.id}></Album>
@@ -107,7 +108,7 @@ export default function History() {
               disabled={loading}
               onClick={prevPage}
             >
-              &lt;&nbsp;Previous
+              <ArrowBigLeft /> Previous
             </button>
           )}
           {page < meta.totalPages && (
@@ -116,7 +117,7 @@ export default function History() {
               className="btn btn-md btn-info"
               onClick={nextPage}
             >
-              Next&nbsp;&gt;
+              Next <ArrowBigRight />
             </button>
           )}
         </div>
