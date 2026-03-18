@@ -1,10 +1,9 @@
-import { createClient, createAdminClient } from '@lib/supabase';
+import { createAdminClient } from '@lib/supabase';
 
-const supabase = createClient();
 const supabaseAdmin = createAdminClient();
 
 export const addEmail = async (email: string): Promise<any> => {
-  const { data, error } = await supabase.from('subscriptions').insert([
+  const { data, error } = await supabaseAdmin.from('subscriptions').insert([
     {
       email,
       is_active: true

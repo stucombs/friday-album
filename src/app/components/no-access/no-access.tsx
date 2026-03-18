@@ -1,6 +1,6 @@
 'use client';
-import { useRouter } from 'next/navigation';
 
+import { useRouter } from 'next/navigation';
 import { Home } from '../home';
 
 export function NoAccess() {

@@ -1,6 +1,7 @@
 'use client';
 
 import { Footer, Home } from '@components';
+import axios from 'axios';
 import { useState } from 'react';
 
 export default function Subscribe() {
@@ -10,7 +11,7 @@ export default function Subscribe() {
   const [error, setError] = useState('');
 
   const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
+    e: React.SubmitEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     e.stopPropagation();
@@ -20,25 +21,19 @@ export default function Subscribe() {
     setSuccess(false);
 
     try {
-      const response = await fetch('api/subscriptions/add-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+      const { data } = await axios.post('api/subscriptions/add-email', {
+        email
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        setLoading(false);
-        setError(data.error);
-      } else {
-        setLoading(false);
+      if (data) {
         setSuccess(true);
         setEmail('');
       }
     } catch (err: any) {
+      console.error(err);
+      setError(err.messsage);
+    } finally {
       setLoading(false);
-      setError(err.details);
     }
   };
 
