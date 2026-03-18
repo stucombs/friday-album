@@ -1,4 +1,4 @@
-import { deleteAlbum, getAlbumById } from '@lib/services/albums.service';
+import { deleteAlbum, getAlbumById } from '@lib/services/albums.admin.service';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(

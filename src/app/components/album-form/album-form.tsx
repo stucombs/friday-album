@@ -1,8 +1,7 @@
 'use client';
 
 import { EditGenres } from '@components/edit-genres';
-import { createAlbum, editAlbum } from '@lib/services/albums.service';
-import { getGenres } from '@lib/services/genre.service';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const intialState = {
@@ -36,9 +35,14 @@ export function AddAlbumForm({ data }: { data?: any }) {
   const loadGenres = async () => {
     try {
       setLoading(true);
-      const data = await getGenres();
+      const { data } = await axios.get('/api/albums/genre');
 
-      setGenres(data);
+      if (!data) {
+        setError('Failed to load genres');
+        return;
+      }
+
+      setGenres(data.genres);
       setLoading(false);
     } catch (err: any) {
       setError(err.details);
@@ -55,7 +59,7 @@ export function AddAlbumForm({ data }: { data?: any }) {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -67,29 +71,34 @@ export function AddAlbumForm({ data }: { data?: any }) {
 
     if (data) {
       try {
-        await editAlbum(formData);
+        // await editAlbum(formData);
         setSuccess(true);
-        setLoading(false);
       } catch (err: any) {
-        console.error('[EDIT ALBUM] ', err);
         setError(err.details);
+      } finally {
         setLoading(false);
       }
 
       return;
     }
 
-    const response = await createAlbum(formData);
+    try {
+      const { data: album } = await axios.post('/api/albums/create', {
+        album: formData
+      });
 
-    if (response.error) {
-      setError(response.error.details);
-      setLoading(false);
-    }
+      console.log('[ALBUM] ', album);
 
-    if (response.data) {
-      setSuccess(true);
+      if (album.data) {
+        setError('');
+        setSuccess(true);
+        setFormData(intialState);
+      }
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message);
+    } finally {
       setLoading(false);
-      setFormData(intialState);
     }
   };
 
@@ -122,17 +131,9 @@ export function AddAlbumForm({ data }: { data?: any }) {
 
     setLoading(true);
     try {
-      const res = await fetch(`/api/get-album-info`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          url: formData.am_link
-        })
+      const { data } = await axios.post(`/api/albums/album-info`, {
+        url: formData.am_link
       });
-
-      const { data } = await res.json();
 
       setFormData((prev) => ({
         ...prev,
@@ -266,7 +267,7 @@ export function AddAlbumForm({ data }: { data?: any }) {
             disabled={loading}
           />
           <button
-            className="btn btn-xs btn-info"
+            className="btn btn-sm btn-info"
             onClick={autopopulateAlbumForm}
             disabled={loading || !formData.am_link}
           >

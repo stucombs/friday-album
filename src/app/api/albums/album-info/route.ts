@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 /* API for Album links courtes of Songlink/Odesli: https://odesli.co */
@@ -6,9 +7,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const request = await req.json();
 
     const url = `https://api.song.link/v1-alpha.1/links?url=${request.url}`;
-    const soResponse = await fetch(url);
-
-    const data = await soResponse.json();
+    const { data } = await axios.get(url);
     const uniqueId = data.linksByPlatform.appleMusic.entityUniqueId;
 
     const response = {
@@ -19,7 +18,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       spotify_link: data.linksByPlatform?.spotify?.url || ''
     };
 
-    return NextResponse.json({ data: response });
+    return NextResponse.json(response);
   } catch (err: any) {
     return NextResponse.json(
       { error: err.message ?? 'Unknown error occurred loading album info' },
