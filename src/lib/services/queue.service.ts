@@ -32,16 +32,28 @@ export const saveQueue = async (queue: any[]): Promise<any> => {
   return data;
 };
 
-export const getTopQueue = async (): Promise<any> => {
+export const promoteAlbum = async (id: number) => {
+  // Demote current live album
+  const { error: demoteError } = await supabaseAdmin
+    .from('albums')
+    .update({
+      archived: true,
+      is_active: false
+    })
+    .eq('is_active', true);
+
+  if (demoteError) throw demoteError;
+
+  //Promote new album
   const { data, error } = await supabaseAdmin
-    .from('queue')
-    .select('*, albums ( * )')
-    .eq('position', 1)
-    .maybeSingle();
+    .from('albums')
+    .update({
+      is_active: true
+    })
+    .eq('id', id)
+    .select();
 
   if (error) throw error;
-
-  console.log(data);
 
   return data;
 };

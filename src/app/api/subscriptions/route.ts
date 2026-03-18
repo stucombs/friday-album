@@ -1,13 +1,17 @@
 'use server';
 
 import { EmailTemplate } from '@components/email-template';
+import { isAuthorized } from '@lib/authguard/authguard';
 import { getSubscriptions } from '@lib/services/subscription.service';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(): Promise<NextResponse> {
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  if (!isAuthorized(req))
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
   try {
     const subscribers = await getSubscriptions();
 
@@ -20,16 +24,20 @@ export async function POST(): Promise<NextResponse> {
       })
     }));
 
-    const { data, error } = await resend.batch.send(subs);
-
-    if (error || data.data.length === 0) {
-      console.error(`Failed to send emails: ${error}`);
-      throw error;
-    }
-
+    // const { data, error } = await resend.batch.send(subs);
     return NextResponse.json({
-      message: `${data.data.length} notification(s) sent successfully`
+      message: 'GET SUBSCRIBERS',
+      data: subs
     });
+
+    // if (error || data.data.length === 0) {
+    //   console.error(`Failed to send emails: ${error}`);
+    //   throw error;
+    // }
+
+    // return NextResponse.json({
+    //   message: `${data.data.length} notification(s) sent successfully`
+    // });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }

@@ -3,11 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: number }> }
+  context: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
   try {
-    const { id } = await params;
-    const album = await getAlbumById(id);
+    const { id } = await context.params;
+    const albumId = Number(id);
+    const album = await getAlbumById(albumId);
 
     if (!album) {
       return NextResponse.json(
@@ -29,11 +30,12 @@ export async function GET(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: number }> }
+  context: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
   try {
-    const { id } = await params;
-    await deleteAlbum(id);
+    const { id } = await context.params;
+    const albumId = Number(id);
+    await deleteAlbum(albumId);
 
     return NextResponse.json({
       message: `Album with ID ${id} deleted successfully`

@@ -36,33 +36,6 @@ export const createAlbum = async (payload: IAlbumDto) => {
   }
 };
 
-export const promoteAlbum = async (id: number) => {
-  // Demote current live album
-  const { error: demoteError } = await supabaseAdmin
-    .from('albums')
-    .update({
-      archived: true,
-      is_active: false
-    })
-    .eq('is_active', true);
-
-  if (demoteError) throw demoteError;
-
-  //Promote new album
-
-  const { data, error } = await supabaseAdmin
-    .from('albums')
-    .update({
-      is_active: true
-    })
-    .eq('id', id)
-    .select();
-
-  if (error) throw error;
-
-  return data;
-};
-
 export const deleteAlbum = async (id: number) => {
   const { data, error } = await supabaseAdmin
     .from('albums')
