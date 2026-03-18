@@ -3,11 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: number }> }
+  context: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
   try {
-    const { id } = await params;
-    await deleteGenre(id);
+    const { id } = await context.params;
+    const genreId = Number(id);
+    await deleteGenre(genreId);
 
     return NextResponse.json({
       message: 'Genre deleted successfully'
