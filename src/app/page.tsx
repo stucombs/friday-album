@@ -1,11 +1,15 @@
 import { PageTitle, Album, Cover, Footer, Holiday } from '@components';
 import { getActiveAlbum } from '@lib/services/albums.service';
 import { getSettings } from '@lib/services/settings.service';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 
 export default async function Home() {
   const activeAlbum: IAlbum = await getActiveAlbum();
   const settings = await getSettings();
+  const cookieStore = await cookies();
+  const isAdmin =
+    cookieStore.get('fa_admin_token')?.value === process.env.API_SECRET;
 
   return (
     <div className="page">
@@ -27,7 +31,7 @@ export default async function Home() {
         >
           JOIN THE DISCUSSION
         </Link>
-        {/* {session && <Link href="/admin">ADMIN</Link>} */}
+        {isAdmin && <Link href="/admin">ADMIN</Link>}
       </main>
       <Footer></Footer>
     </div>
