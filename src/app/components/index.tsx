@@ -5,7 +5,6 @@ export * from './footer';
 export * from './home';
 export * from './loader';
 export * from './album-form';
-export * from './no-access';
 export * from './edit-genres';
 export * from './edit-album';
 export * from './album-modal';
