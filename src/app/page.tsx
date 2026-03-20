@@ -1,15 +1,10 @@
-export const dynamic = 'force-dynamic';
-
 import { PageTitle, Album, Cover, Footer, Holiday } from '@components';
 import { getActiveAlbum } from '@lib/services/albums.service';
-import { authOptions } from '@lib/services/auth.service';
 import { getSettings } from '@lib/services/settings.service';
 import Link from 'next/link';
-import { getServerSession } from 'next-auth';
 
 export default async function Home() {
   const activeAlbum: IAlbum = await getActiveAlbum();
-  const session = await getServerSession(authOptions);
   const settings = await getSettings();
 
   return (
@@ -32,7 +27,7 @@ export default async function Home() {
         >
           JOIN THE DISCUSSION
         </Link>
-        {session && <Link href="/admin">ADMIN</Link>}
+        {/* {session && <Link href="/admin">ADMIN</Link>} */}
       </main>
       <Footer></Footer>
     </div>
