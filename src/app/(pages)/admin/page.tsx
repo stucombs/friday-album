@@ -10,7 +10,9 @@ export default async function Admin() {
         <Link href="/admin/add-album">ADD ALBUM</Link>
         <Link href="/admin/queue">VIEW QUEUE</Link>
         <Link href="/admin/settings">SETTINGS</Link>
-        <Link href="/api/auth/logout">SIGNOUT</Link>
+        <Link href="/api/auth/logout" prefetch={false}>
+          SIGNOUT
+        </Link>
       </main>
       <Footer></Footer>
     </div>
