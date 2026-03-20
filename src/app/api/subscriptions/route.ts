@@ -8,7 +8,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(req: NextRequest): Promise<NextResponse> {
+export async function GET(req: NextRequest): Promise<NextResponse> {
   if (!isAuthorized(req))
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 

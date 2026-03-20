@@ -2,7 +2,7 @@ import { isAuthorized } from '@lib/authguard/authguard';
 import { getQueue, promoteAlbum, saveQueue } from '@lib/services/queue.service';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: NextRequest): Promise<NextResponse> {
+export async function GET(req: NextRequest): Promise<NextResponse> {
   if (!isAuthorized(req))
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
