@@ -13,7 +13,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   cookieStore.set('fa_admin_token', process.env.API_SECRET!, {
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
+    sameSite: 'lax',
     maxAge: 60 * 60 * 48 //48 hours
   });
 
