@@ -1,7 +1,7 @@
 'use server';
 
 import { EmailTemplate } from '@components/email-template';
-import { isAuthorized } from '@lib/authguard/authguard';
+import { isAuthorized } from '@lib/guards/cronguard';
 import { getSubscriptions } from '@lib/services/subscription.service';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';

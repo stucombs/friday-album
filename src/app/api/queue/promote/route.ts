@@ -1,4 +1,4 @@
-import { isAuthorized } from '@lib/authguard/authguard';
+import { isAuthorized } from '@lib/guards/cronguard';
 import { getQueue, promoteAlbum, saveQueue } from '@lib/services/queue.service';
 import { NextRequest, NextResponse } from 'next/server';
 

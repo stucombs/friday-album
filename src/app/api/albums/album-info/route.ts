@@ -1,8 +1,12 @@
+import { isAdmin } from '@lib/guards/adminguard';
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 /* API for Album links courtes of Songlink/Odesli: https://odesli.co */
 export async function POST(req: NextRequest): Promise<NextResponse> {
+  if (!(await isAdmin()))
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
   try {
     const request = await req.json();
 

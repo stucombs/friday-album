@@ -1,6 +1,7 @@
 import { getQueue, saveQueue } from '@lib/services/queue.service';
 import { NextRequest, NextResponse } from 'next/server';
 
+// PROTECT
 export async function GET(): Promise<NextResponse> {
   try {
     const data = await getQueue();
@@ -20,7 +21,7 @@ export async function GET(): Promise<NextResponse> {
     );
   }
 }
-
+// PROTECT
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const { queue } = await req.json();

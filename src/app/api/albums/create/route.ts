@@ -1,7 +1,11 @@
+import { isAdmin } from '@lib/guards/adminguard';
 import { createAlbum } from '@lib/services/albums.admin.service';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
+  if (!(await isAdmin()))
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
   try {
     const { album } = await req.json();
 

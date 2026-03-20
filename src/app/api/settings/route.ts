@@ -13,7 +13,7 @@ export async function GET(): Promise<NextResponse> {
     );
   }
 }
-
+// PROTECT
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const settings = await req.json();

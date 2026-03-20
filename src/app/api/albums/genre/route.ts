@@ -1,3 +1,4 @@
+import { isAdmin } from '@lib/guards/adminguard';
 import { createGenre, getGenres } from '@lib/services/genre.service';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -15,6 +16,9 @@ export async function GET(): Promise<NextResponse> {
 }
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
+  if (!(await isAdmin()))
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
   try {
     const genre = await req.json();
 
