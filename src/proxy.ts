@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export const middleware = (request: NextRequest) => {
+export const proxy = (request: NextRequest) => {
   const token = request.cookies.get('fa_admin_token');
 
   if (!token || token.value !== process.env.API_SECRET) {
