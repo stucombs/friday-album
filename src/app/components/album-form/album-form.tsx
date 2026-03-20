@@ -87,8 +87,6 @@ export function AddAlbumForm({ data }: { data?: any }) {
         album: formData
       });
 
-      console.log('[ALBUM] ', album);
-
       if (album.data) {
         setError('');
         setSuccess(true);
