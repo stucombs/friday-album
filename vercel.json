@@ -2,12 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [
     {
-      "path": "/api/albums/promote",
-      "schedule": "0 9 * * 5"
+      "path": "/api/albums/queue/promote",
+      "schedule": "0 13 * * 5"
     },
     {
       "path": "/api/subscriptions",
-      "schedule": "30 9 * * 5"
+      "schedule": "0 14 * * 5"
     }
   ]
 }
