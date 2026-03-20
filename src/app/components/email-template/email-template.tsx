@@ -17,7 +17,7 @@ export function EmailTemplate({ unsub_token }: EmailTemplateProps) {
           fontSize: '18px',
           fontWeight: '600',
           color: '#ffffff',
-          background: '#6366f1',
+          background: '#3C3489',
           borderRadius: '100px',
           textDecoration: 'none',
           width: '225px',

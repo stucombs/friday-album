@@ -24,20 +24,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       })
     }));
 
-    // const { data, error } = await resend.batch.send(subs);
+    const { data, error } = await resend.batch.send(subs);
+
+    if (error || data.data.length === 0) {
+      console.error(`Failed to send emails: ${error}`);
+      throw error;
+    }
+
     return NextResponse.json({
-      message: 'GET SUBSCRIBERS',
-      data: subs
+      message: `${data.data.length} notification(s) sent successfully`
     });
-
-    // if (error || data.data.length === 0) {
-    //   console.error(`Failed to send emails: ${error}`);
-    //   throw error;
-    // }
-
-    // return NextResponse.json({
-    //   message: `${data.data.length} notification(s) sent successfully`
-    // });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
