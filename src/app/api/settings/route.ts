@@ -1,3 +1,4 @@
+import { isAdmin } from '@lib/guards/adminguard';
 import { getSettings, setSettings } from '@lib/services/settings.service';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -13,8 +14,11 @@ export async function GET(): Promise<NextResponse> {
     );
   }
 }
-// PROTECT
+
 export async function POST(req: NextRequest): Promise<NextResponse> {
+  if (!isAdmin(req))
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
   try {
     const settings = await req.json();
 

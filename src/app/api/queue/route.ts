@@ -1,8 +1,11 @@
+import { isAdmin } from '@lib/guards/adminguard';
 import { getQueue, saveQueue } from '@lib/services/queue.service';
 import { NextRequest, NextResponse } from 'next/server';
 
-// PROTECT
-export async function GET(): Promise<NextResponse> {
+export async function GET(req: NextRequest): Promise<NextResponse> {
+  if (!isAdmin(req))
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
   try {
     const data = await getQueue();
 
@@ -21,8 +24,11 @@ export async function GET(): Promise<NextResponse> {
     );
   }
 }
-// PROTECT
+
 export async function POST(req: NextRequest): Promise<NextResponse> {
+  if (!isAdmin(req))
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
   try {
     const { queue } = await req.json();
 
