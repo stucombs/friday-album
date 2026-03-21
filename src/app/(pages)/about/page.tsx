@@ -1,4 +1,5 @@
 import { Footer, Home } from '@components';
+import Image from 'next/image';
 
 export default function About() {
   return (
@@ -15,7 +16,12 @@ export default function About() {
           Friday Album your new ritual for ditching the week and pressing play
           your weekend.
         </p>
-        <div className="cd"></div>
+        <Image
+          src="/favicon-512x512.png"
+          width={225}
+          height={225}
+          alt="friday album logo"
+        />
       </main>
       <Footer></Footer>
     </div>
