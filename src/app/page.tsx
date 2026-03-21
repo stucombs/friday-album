@@ -15,6 +15,9 @@ export default async function Home() {
     <div className="page">
       <main className="main">
         <PageTitle></PageTitle>
+        {settings?.value?.message && (
+          <span className="text-lg text-center">{settings.value.message}</span>
+        )}
         {settings?.value?.theme && (
           <Holiday theme={settings?.value?.theme}></Holiday>
         )}
@@ -28,6 +31,7 @@ export default async function Home() {
           target="_blank"
           rel="noopener noreferrer"
           className="discord"
+          prefetch={false}
         >
           JOIN THE DISCUSSION
         </Link>

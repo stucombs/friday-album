@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const initialState = {
-  theme: 'default'
+  theme: 'default',
+  message: ''
 };
 
 const themes = [
@@ -33,7 +34,10 @@ export default function Settings() {
       try {
         const { data } = await axios.get('/api/settings');
         if (data) {
-          setFormData(data.value);
+          setFormData((prev) => ({
+            ...prev,
+            ...data.value
+          }));
           setUpdatedAt(data.created_at);
         }
       } catch (err) {
@@ -92,7 +96,7 @@ export default function Settings() {
         )}
         <form
           onSubmit={handleFormSubmit}
-          className="flex flex-col gap-4 w-full"
+          className="flex flex-col gap-2 w-full"
         >
           <fieldset className="fieldset border-base-100 rounded-box w-xs border p-4">
             <label className="label">Site Theme</label>
@@ -111,6 +115,19 @@ export default function Settings() {
                 </option>
               ))}
             </select>
+          </fieldset>
+          <fieldset className="fieldset border-base-100 rounded-box w-xs border p-4">
+            <label className="label">Weekly message</label>
+            <input
+              type="text"
+              className="input input-md w-full"
+              name="message"
+              id="message"
+              value={formData.message}
+              onChange={handleChange}
+              disabled={loading}
+              maxLength={32}
+            />
           </fieldset>
           <div className="flex justify-center">
             <button
