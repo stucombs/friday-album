@@ -1,6 +1,6 @@
 'use client';
 
-import { Home, Loader } from '@app/components';
+import { EditAlbum, Home, Loader } from '@app/components';
 import axios from 'axios';
 import {
   ChevronDown,
@@ -21,8 +21,8 @@ export default function Queue() {
   const [loading, setLoading] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
   const [clear, setClear] = useState(false);
-  // const [editAlbum, setEditAlbum] = useState(false);
-  // const [selectedAlbum, setSelectedAlbum] = useState<IAlbum>();
+  const [editAlbum, setEditAlbum] = useState(false);
+  const [selectedAlbum, setSelectedAlbum] = useState<IAlbum>();
 
   useEffect(() => {
     const loadAll = async () => {
@@ -156,7 +156,8 @@ export default function Queue() {
   };
 
   const onEditAlbum = (album: IAlbum): void => {
-    // TODO: Add edit album logic
+    setEditAlbum(true);
+    setSelectedAlbum(album);
   };
 
   return (
@@ -165,9 +166,6 @@ export default function Queue() {
         <Home></Home>
         <Link href="/admin">RETURN TO ADMIN</Link>
         <h3>ALBUM QUEUE</h3>
-        <div className="flex flex-row justify-center gap-4">
-          <button className="btn btn-md btn-success">RUN QUEUE NOW</button>
-        </div>
         <div className="divider divider-accent">
           {queue.length} albums in queue
         </div>
@@ -244,7 +242,10 @@ export default function Queue() {
                   </button>
                 </div>
                 <div className="tooltip" data-tip="Edit album">
-                  <button className="btn btn-sm btn-info">
+                  <button
+                    className="btn btn-sm btn-info"
+                    onClick={() => onEditAlbum(album)}
+                  >
                     <Pencil />
                   </button>
                 </div>
@@ -260,6 +261,13 @@ export default function Queue() {
             </div>
           ))}
         </div>
+        {selectedAlbum && (
+          <EditAlbum
+            isOpen={editAlbum}
+            data={selectedAlbum}
+            onClose={() => setEditAlbum(false)}
+          ></EditAlbum>
+        )}
         <div className="m-8"></div>
         {error && <span>{error}</span>}
       </main>

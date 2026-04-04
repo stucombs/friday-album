@@ -44,7 +44,7 @@ export async function POST(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   try {
-    const album = await req.json();
+    const { album } = await req.json();
     if (!album)
       return NextResponse.json(
         { error: 'Failed to update album. Missing data' },

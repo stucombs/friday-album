@@ -71,9 +71,14 @@ export function AddAlbumForm({ data }: { data?: any }) {
 
     if (data) {
       try {
-        // await editAlbum(formData);
-        setSuccess(true);
+        const { data: album } = await axios.post(`/api/albums/${data.id}`, {
+          album: formData
+        });
+        if (album) {
+          setSuccess(true);
+        }
       } catch (err: any) {
+        console.error(err);
         setError(err.details);
       } finally {
         setLoading(false);
@@ -161,6 +166,8 @@ export function AddAlbumForm({ data }: { data?: any }) {
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 min-w-[32vw]"
+        id={data ? `album-form${data.id}` : 'album-form'}
+        name={data ? `album-form${data.id}` : 'album-form'}
       >
         <input
           type="text"
