@@ -1,5 +1,9 @@
 import { isAdmin } from '@lib/guards/adminguard';
-import { deleteAlbum, getAlbumById } from '@lib/services/albums.admin.service';
+import {
+  deleteAlbum,
+  editAlbum,
+  getAlbumById
+} from '@lib/services/albums.admin.service';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
@@ -27,6 +31,34 @@ export async function GET(
   } catch (err: any) {
     return NextResponse.json(
       { error: `Failed to retrieve album`, message: err.message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+): Promise<NextResponse> {
+  if (!(await isAdmin(req)))
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+  try {
+    const album = await req.json();
+    if (!album)
+      return NextResponse.json(
+        { error: 'Failed to update album. Missing data' },
+        { status: 400 }
+      );
+
+    const data = await editAlbum(album);
+    return NextResponse.json({
+      message: 'Album updated successfully',
+      data
+    });
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: 'Failed to update album', message: err.message },
       { status: 500 }
     );
   }

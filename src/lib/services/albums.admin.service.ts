@@ -60,7 +60,8 @@ export const editAlbum = async (payload: any) => {
       am_link: payload.am_link,
       updated_at: new Date()
     })
-    .eq('id', payload.id);
+    .eq('id', payload.id)
+    .select();
 
   if (error) throw error;
 
