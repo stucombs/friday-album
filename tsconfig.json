@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "baseUrl": "./",
     "lib": [
       "dom",
       "dom.iterable",
@@ -25,19 +24,19 @@
     ],
     "paths": {
       "@app/*": [
-        "src/app/*"
+        "./src/app/*"
       ],
       "@components": [
-        "src/app/components"
+        "./src/app/components"
       ],
       "@components/*": [
-        "src/app/components/*"
+        "./src/app/components/*"
       ],
       "@lib/*": [
-        "src/lib/*"
+        "./src/lib/*"
       ],
       "@types/*": [
-        "src/types/*"
+        "./src/types/*"
       ]
     }
   },
