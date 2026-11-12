@@ -6,10 +6,11 @@ declare global {
     title: string;
     artist: string;
     release_year: number;
-    genre: IGenre;
+    genre_name: string;
     am_link: string;
     spotify_link: string;
     cover_url: string;
+    active_date?: Date;
   }
 
   interface IGenre {

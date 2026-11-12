@@ -8,10 +8,15 @@ export function Album({ data }: { data?: IAlbum }) {
   return (
     <div className="card-xl card-width bg-base-300">
       <div className="p-3 gap-2 flex flex-col items-center">
+        {data?.active_date && (
+          <p className="italic">
+            {new Date(data.active_date + 'T00:00').toLocaleDateString()}
+          </p>
+        )}
         <p className="card-title">{data?.title}</p>
         <p className="italic">{data?.artist}</p>
         <p>
-          <span className="capitalize">{data?.genre.name}</span> |{' '}
+          <span className="capitalize">{data?.genre_name}</span> |{' '}
           {data?.release_year}
         </p>
         {/* <p className="capitalize">{data?.genre.name}</p> */}

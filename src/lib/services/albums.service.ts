@@ -5,8 +5,8 @@ const supabaseAnon = createClient();
 export const getActiveAlbum = async (): Promise<IAlbum> => {
   const { data, error } = await supabaseAnon
     .from('albums')
-    .select('*, genre ( name )')
-    .eq('is_active', true)
+    .select('*, ...genre ( genre_name:name ), album_status!inner()')
+    .eq('album_status.is_active', true)
     .maybeSingle();
 
   if (error) throw error;
@@ -17,10 +17,10 @@ export const getActiveAlbum = async (): Promise<IAlbum> => {
 export const getAlbumBacklog = async (): Promise<IAlbum[]> => {
   const { data, error, count } = await supabaseAnon
     .from('albums')
-    .select('*, genre ( name )', { count: 'exact' })
-    .eq('is_active', false)
-    .eq('archived', false)
-    .order('id', { ascending: false });
+    .select('*, ...genre ( genre_name:name ), album_status()')
+    .is('album_status', null);
+
+  console.log(data);
 
   if (error) throw error;
 
@@ -33,11 +33,16 @@ export const getPastAlbums = async (page: number = 1, limit: number = 5) => {
 
   const { data, error, count } = await supabaseAnon
     .from('albums')
-    .select('*, genre ( name )', { count: 'exact' })
-    .eq('is_active', false)
-    .eq('archived', true)
+    .select(
+      '*, ...genre ( genre_name:name ), ...album_status!inner( active_date )',
+      { count: 'exact' }
+    )
+    .eq('album_status.is_active', false)
     .range(from, to)
-    .order('updated_at', { ascending: false });
+    .order('album_status(active_date)', {
+      ascending: false,
+      nullsFirst: false
+    });
 
   if (error) throw error;
 
