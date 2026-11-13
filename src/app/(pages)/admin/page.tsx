@@ -1,4 +1,4 @@
-import { Home, Footer } from '@components';
+import { Home } from '@components';
 import Link from 'next/link';
 
 export default async function Admin() {
@@ -14,7 +14,6 @@ export default async function Admin() {
           SIGNOUT
         </Link>
       </main>
-      <Footer></Footer>
     </div>
   );
 }

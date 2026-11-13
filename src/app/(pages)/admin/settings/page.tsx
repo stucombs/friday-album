@@ -1,6 +1,6 @@
 'use client';
 
-import { Footer, Home } from '@app/components';
+import { Home } from '@app/components';
 import axios from 'axios';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -153,7 +153,6 @@ export default function Settings() {
           </div>
         )}
       </main>
-      <Footer></Footer>
     </div>
   );
 }

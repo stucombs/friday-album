@@ -1,4 +1,4 @@
-import { Footer, Home, AddAlbumForm } from '@components';
+import { Home, AddAlbumForm } from '@components';
 import Link from 'next/link';
 
 export default function AddAlbum() {
@@ -10,7 +10,6 @@ export default function AddAlbum() {
         <h3>ADD A NEW ALBUM</h3>
         <AddAlbumForm></AddAlbumForm>
       </main>
-      <Footer></Footer>
     </div>
   );
 }

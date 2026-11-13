@@ -7,6 +7,7 @@ export function Footer() {
       <p>
         A concept by <a href="https://stucombs.com">Stu Combs</a>
       </p>
+      <p>{'</>'} with ❤️ by a human</p>
     </footer>
   );
 }
