@@ -4,13 +4,13 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" REVOKE ALL ON TA
 
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" REVOKE ALL ON TABLES FROM "service_role";
 
-DROP POLICY "Enable access for all anon users" ON "public"."albums";
+DROP POLICY IF EXISTS "Enable access for all anon users" ON "public"."albums";
 
-DROP POLICY "Enable access for all anon users" ON "public"."genre";
+DROP POLICY IF EXISTS "Enable access for all anon users" ON "public"."genre";
 
-DROP POLICY "anon_users_all" ON "public"."site_settings";
+DROP POLICY IF EXISTS "anon_users_all" ON "public"."site_settings";
 
-DROP POLICY "anon_users_all" ON "public"."subscriptions";
+DROP POLICY IF EXISTS "anon_users_all" ON "public"."subscriptions";
 
 REVOKE ALL ON TABLE "public"."albums" FROM "postgres";
 
