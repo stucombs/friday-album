@@ -20,8 +20,6 @@ export const getAlbumBacklog = async (): Promise<IAlbum[]> => {
     .select('*, ...genre ( genre_name:name ), album_status()')
     .is('album_status', null);
 
-  console.log(data);
-
   if (error) throw error;
 
   return data;

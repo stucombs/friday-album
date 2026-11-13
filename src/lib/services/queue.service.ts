@@ -35,9 +35,8 @@ export const saveQueue = async (queue: any[]): Promise<any> => {
 export const promoteAlbum = async (id: number) => {
   // Demote current live album
   const { error: demoteError } = await supabaseAdmin
-    .from('albums')
+    .from('album_status')
     .update({
-      archived: true,
       is_active: false
     })
     .eq('is_active', true);
@@ -46,11 +45,11 @@ export const promoteAlbum = async (id: number) => {
 
   //Promote new album
   const { data, error } = await supabaseAdmin
-    .from('albums')
-    .update({
-      is_active: true
+    .from('album_status')
+    .insert({
+      is_active: true,
+      album_id: id
     })
-    .eq('id', id)
     .select();
 
   if (error) throw error;

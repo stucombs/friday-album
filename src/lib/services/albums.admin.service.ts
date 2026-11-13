@@ -5,7 +5,7 @@ const supabaseAdmin = createAdminClient();
 export const getAlbumById = async (id: number): Promise<IAlbum> => {
   const { data, error } = await supabaseAdmin
     .from('albums')
-    .select('*, genre ( name )')
+    .select('*, ...genre ( genre_name:name )')
     .eq('id', id)
     .maybeSingle();
 
@@ -20,9 +20,7 @@ export const createAlbum = async (payload: IAlbumDto) => {
       .from('albums')
       .insert([
         {
-          ...payload,
-          is_active: false,
-          archived: false
+          ...payload
         }
       ])
       .select();
